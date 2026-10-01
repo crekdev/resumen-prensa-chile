@@ -22,7 +22,13 @@ Genera la edición de hoy del "Resumen de Prensa Chile". Sesión no atendida: no
    conteo de medios (17), lead, historias, briefs, Pulso social, "Próxima edición" (próximo día hábil) y colophon.
 7. Guarda el resultado como `index.html` y como copia `editions/AAAA-MM-DD.html` (fecha de hoy, hora de Chile).
 8. `git add index.html editions/ && git commit -m "Edición N.º <n> — <fecha>" && git push origin main`.
-   El workflow de Pages redeploya solo. Si hoy ya existe `editions/AAAA-MM-DD.html`, sobrescríbelo (re-ejecución).
-9. (Opcional, mientras se mantenga) publica el mismo HTML en el Artifact
-   https://claude.ai/code/artifact/e3f49e59-871e-42d5-a8f5-100e77490fb5 (mismo url, no cambiar favicon).
-10. Cierra con 2-3 líneas: confirmación + link al sitio de Pages.
+   El workflow de Pages redeploya solo. Si hoy ya existe `editions/AAAA-MM-DD.html`, sobrescríbelo (re-ejecución) y
+   conserva el N.º de edición de esa fecha en vez de sumarle 1 (el +1 del paso 6 aplica solo a una fecha nueva).
+   Si el push falla (error de red, permisos o conflicto), NO te detengas: anota el error exacto y pasa al paso 9.
+9. OBLIGATORIO, aunque el paso 8 haya fallado: publica el mismo HTML en el Artifact
+   https://claude.ai/code/artifact/e3f49e59-871e-42d5-a8f5-100e77490fb5 usando ese mismo url (primero action "read" de
+   ese url, luego publicar con `url`; no cambiar favicon). Este paso nunca se omite.
+10. Cierra con 2-4 líneas que incluyan SIEMPRE ambos links: el sitio de Pages
+    (https://crekdev.github.io/resumen-prensa-chile/) y el Artifact
+    (https://claude.ai/code/artifact/e3f49e59-871e-42d5-a8f5-100e77490fb5). Si el push al repo (paso 8) falló, di
+    ahí el error exacto; si el Artifact (paso 9) falló, también.
