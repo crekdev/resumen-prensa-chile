@@ -1,0 +1,639 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Resumen diario de prensa chilena: noticias cruzadas entre 17 medios, contraste de enfoques y pulso social. Edición de lunes a viernes.">
+<title>Resumen de Prensa Chile</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Source+Sans+3:ital,wght@0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+
+  :root {
+    --paper: #f2eee1;
+    --paper-2: #e9e1cc;
+    --paper-3: #ddd2b3;
+    --ink: #211d16;
+    --ink-soft: #5c5643;
+    --ink-faint: #8b836b;
+    --oxblood: #7c1f2b;
+    --oxblood-deep: #5a1420;
+    --oxblood-tint: #f4e2e0;
+    --navy: #1d2c46;
+    --navy-soft: #3d5075;
+    --navy-tint: #e3e6ee;
+    --forest: #2c5c41;
+    --forest-tint: #e1ebe3;
+    --line: #c7b998;
+    --line-soft: #dcd2b4;
+    --shadow: rgba(33, 29, 22, 0.1);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper: #17140f;
+      --paper-2: #211c14;
+      --paper-3: #2b2419;
+      --ink: #ece4d1;
+      --ink-soft: #b8ad91;
+      --ink-faint: #8a8067;
+      --oxblood: #e0818c;
+      --oxblood-deep: #ec9aa3;
+      --oxblood-tint: #3a2024;
+      --navy: #90aede;
+      --navy-soft: #6f8dc0;
+      --navy-tint: #1e2636;
+      --forest: #7fb494;
+      --forest-tint: #1c2b21;
+      --line: #4a4230;
+      --line-soft: #332c1f;
+      --shadow: rgba(0, 0, 0, 0.4);
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --paper: #17140f;
+    --paper-2: #211c14;
+    --paper-3: #2b2419;
+    --ink: #ece4d1;
+    --ink-soft: #b8ad91;
+    --ink-faint: #8a8067;
+    --oxblood: #e0818c;
+    --oxblood-deep: #ec9aa3;
+    --oxblood-tint: #3a2024;
+    --navy: #90aede;
+    --navy-soft: #6f8dc0;
+    --navy-tint: #1e2636;
+    --forest: #7fb494;
+    --forest-tint: #1c2b21;
+    --line: #4a4230;
+    --line-soft: #332c1f;
+    --shadow: rgba(0, 0, 0, 0.4);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--paper-3);
+    color: var(--ink);
+    font-family: 'Source Sans 3', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .page {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 2.5rem 1.75rem 3.5rem;
+    background: var(--paper);
+  }
+
+  a { color: var(--navy); text-decoration-color: var(--line); text-underline-offset: 2px; }
+  a:hover { color: var(--oxblood); text-decoration-color: var(--oxblood); }
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--oxblood); outline-offset: 2px; }
+
+  /* ---------- Masthead ---------- */
+  .ear {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: 0.9rem;
+  }
+
+  .masthead { text-align: center; }
+
+  .masthead .kicker {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--oxblood);
+    margin-bottom: 0.6rem;
+  }
+
+  .title {
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 700;
+    font-optical-sizing: auto;
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    letter-spacing: -0.01em;
+    line-height: 0.95;
+    margin: 0 0 0.85rem;
+    color: var(--ink);
+    text-wrap: balance;
+  }
+
+  .dateline {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.55rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.78rem;
+    color: var(--ink-soft);
+  }
+
+  .dateline .edition { color: var(--oxblood); font-weight: 600; }
+  .dateline .divider { color: var(--line); }
+
+  .rule-thick {
+    height: 4px;
+    background: var(--ink);
+    margin: 1.4rem 0 0.35rem;
+  }
+  .rule-thin {
+    height: 1px;
+    background: var(--line);
+    margin: 0.35rem 0 0;
+  }
+  .rule-hair {
+    height: 1px;
+    background: var(--line-soft);
+  }
+
+  /* ---------- Lead ---------- */
+  .lead {
+    padding: 1.6rem 0 1.2rem;
+    max-width: 880px;
+    margin: 0 auto;
+  }
+  .lead p {
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 500;
+    font-size: clamp(1.15rem, 1.9vw, 1.5rem);
+    line-height: 1.5;
+    color: var(--ink);
+    margin: 0;
+    text-wrap: pretty;
+  }
+  .dropcap {
+    float: left;
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 700;
+    font-size: 3.6rem;
+    line-height: 0.8;
+    padding: 0.1rem 0.35rem 0 0;
+    color: var(--oxblood);
+  }
+
+  /* ---------- Layout ---------- */
+  .grid {
+    display: grid;
+    grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+    gap: 0 2.75rem;
+    margin-top: 1.8rem;
+    align-items: start;
+  }
+  @media (max-width: 860px) {
+    .grid { grid-template-columns: 1fr; gap: 2.25rem 0; }
+  }
+
+  .section-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--oxblood);
+    margin: 0 0 1rem;
+    padding-bottom: 0.55rem;
+    border-bottom: 2px solid var(--ink);
+  }
+
+  /* ---------- Story cards ---------- */
+  .stories { min-width: 0; }
+  .story + .story { margin-top: 1.9rem; padding-top: 1.9rem; border-top: 1px solid var(--line); }
+
+  .story .kicker {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--navy-soft);
+    margin-bottom: 0.5rem;
+  }
+
+  .story h3 {
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 600;
+    font-size: clamp(1.2rem, 2vw, 1.55rem);
+    line-height: 1.25;
+    margin: 0 0 0.85rem;
+    color: var(--ink);
+    text-wrap: balance;
+  }
+
+  .story ol {
+    margin: 0 0 1rem;
+    padding-left: 1.2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+  }
+  .story li {
+    font-size: 0.98rem;
+    line-height: 1.58;
+    color: var(--ink-soft);
+    padding-left: 0.15rem;
+  }
+  .story li::marker {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.85rem;
+    color: var(--oxblood);
+    font-weight: 600;
+  }
+  .story li a { color: var(--navy); font-weight: 600; }
+  .story li strong { color: var(--ink); }
+
+  .chips { display: flex; flex-wrap: wrap; gap: 0.45rem; }
+  .chip {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.03em;
+    color: var(--navy);
+    background: var(--navy-tint);
+    border: 1px solid var(--line);
+    padding: 0.28rem 0.6rem;
+    border-radius: 3px;
+    text-decoration: none;
+  }
+  .chip:hover { background: var(--oxblood-tint); border-color: var(--oxblood); color: var(--oxblood-deep); }
+
+  /* ---------- Sidebar briefs ---------- */
+  .sidebar { display: flex; flex-direction: column; gap: 2.2rem; }
+  .briefs ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
+  .brief { padding: 0.95rem 0; border-bottom: 1px solid var(--line-soft); }
+  .brief:first-child { padding-top: 0; }
+  .brief:last-child { border-bottom: none; }
+
+  .brief .outlet {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.66rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--oxblood);
+    display: block;
+    margin-bottom: 0.3rem;
+  }
+  .brief a.headline {
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 600;
+    font-size: 1.02rem;
+    line-height: 1.32;
+    color: var(--ink);
+    text-decoration: none;
+    display: block;
+    margin-bottom: 0.35rem;
+    text-wrap: balance;
+  }
+  .brief a.headline:hover { color: var(--oxblood); }
+  .brief p {
+    font-size: 0.88rem;
+    line-height: 1.5;
+    color: var(--ink-soft);
+    margin: 0;
+  }
+
+  /* ---------- Pulso Social ---------- */
+  .pulse-section {
+    margin-top: 2.4rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--line);
+  }
+  .pulse-intro {
+    max-width: 780px;
+    font-size: 0.98rem;
+    line-height: 1.55;
+    color: var(--ink-soft);
+    margin: 0 0 1.5rem;
+  }
+
+  .sentiment-strip {
+    display: flex;
+    align-items: center;
+    gap: 1.1rem;
+    margin-bottom: 1.9rem;
+    flex-wrap: wrap;
+  }
+  .sentiment-bar {
+    flex: 1 1 260px;
+    max-width: 420px;
+    height: 10px;
+    border-radius: 5px;
+    overflow: hidden;
+    display: flex;
+    border: 1px solid var(--line);
+  }
+  .sentiment-bar span { display: block; height: 100%; }
+  .seg-neg { background: var(--oxblood); }
+  .seg-neu { background: var(--line-soft); }
+  .seg-fav { background: var(--forest); }
+  .sentiment-legend {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--ink-soft);
+  }
+  .sentiment-legend .dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 0.35rem; }
+  .sentiment-legend .dot.neg { background: var(--oxblood); }
+  .sentiment-legend .dot.neu { background: var(--line-soft); border: 1px solid var(--line); }
+  .sentiment-legend .dot.fav { background: var(--forest); }
+
+  .pulse-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.6rem 2.2rem;
+  }
+  @media (max-width: 700px) {
+    .pulse-grid { grid-template-columns: 1fr; }
+  }
+  .pulse-card { min-width: 0; }
+  .pulse-card .outlet {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.66rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--forest);
+    display: block;
+    margin-bottom: 0.35rem;
+  }
+  .pulse-card h4 {
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 600;
+    font-size: 1.08rem;
+    line-height: 1.3;
+    margin: 0 0 0.5rem;
+    color: var(--ink);
+  }
+  .pulse-card h4 a { color: inherit; text-decoration: none; }
+  .pulse-card h4 a:hover { color: var(--oxblood); }
+  .pulse-card p {
+    font-size: 0.92rem;
+    line-height: 1.55;
+    color: var(--ink-soft);
+    margin: 0;
+  }
+  .pulse-card blockquote {
+    margin: 0.55rem 0 0;
+    padding-left: 0.7rem;
+    border-left: 2px solid var(--line);
+    font-style: italic;
+    font-size: 0.88rem;
+    color: var(--ink-faint);
+  }
+
+  /* ---------- Footer ---------- */
+  .footer {
+    margin-top: 2.75rem;
+    padding-top: 1.4rem;
+    border-top: 4px solid var(--ink);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 1rem 2rem;
+  }
+  .next-edition {
+    font-family: 'Fraunces', Georgia, serif;
+    font-style: italic;
+    font-weight: 500;
+    font-size: 1.05rem;
+    color: var(--oxblood-deep);
+  }
+  .colophon {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    line-height: 1.65;
+    color: var(--ink-faint);
+    max-width: 640px;
+  }
+  .colophon .sources-list { color: var(--ink-soft); }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .chip, .brief a.headline, a { transition: color 0.15s ease, background 0.15s ease, border-color 0.15s ease; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="ear">
+    <span>Edición chilena · circulación digital</span>
+    <span>Publicación de lunes a viernes</span>
+  </div>
+
+  <header class="masthead">
+    <div class="kicker">Prensa nacional en contraste</div>
+    <h1 class="title">Resumen de Prensa Chile</h1>
+    <div class="dateline">
+      <span class="edition">Edición N.º 19</span>
+      <span class="divider">·</span>
+      <span class="date">Jueves 1 de octubre de 2026</span>
+      <span class="divider">·</span>
+      <span>17 medios monitoreados</span>
+    </div>
+  </header>
+
+  <div class="rule-thick"></div>
+  <div class="rule-thin"></div>
+
+  <section class="lead">
+    <p><span class="dropcap">C</span>hile amanece con la resaca del Presupuesto 2027 que Kast presentó anoche en cadena nacional —un alza de gasto del 1,5% que el oficialismo celebra y la oposición recibe preguntando dónde están los US$6.000 millones de ajuste prometidos— justo en medio de lo que El Dínamo bautizó como la "semana del terror" económica de La Moneda: el Imacec cayó 1,0% en agosto, arrastrado por un desplome minero de 17,4%, mientras el desempleo marca 9,6%, su peor cifra en cinco años. A la par, el Gobierno litiga consigo mismo cuántas autoridades ha perdido desde marzo —¿41 o 52?, depende de qué se cuente— y Michelle Bachelet, tras su revés en la ONU, reaparece como el comodín político que inquieta tanto a la oposición como a la propia derecha.</p>
+  </section>
+
+  <div class="grid">
+    <section class="stories">
+      <h2 class="section-label">Noticias cruzadas</h2>
+
+      <article class="story">
+        <div class="kicker">Presupuesto 2027 — aplausos oficialistas, dudas sobre el ajuste prometido</div>
+        <h3>Kast presenta el Presupuesto 2027 en cadena nacional; la oposición exige saber dónde están los US$6.000 millones</h3>
+        <ol>
+          <li><strong>El hecho compartido.</strong> Kast presentó anoche en cadena nacional el Presupuesto 2027, con un alza de gasto fiscal de 1,5% y prioridades en empleo, seguridad, salud e infancia, según registran Radio U. de Chile, Diario Financiero, El Mostrador y 24 Horas.</li>
+          <li><strong>El tono celebratorio que recopila El Dínamo.</strong> El medio reúne las voces oficialistas tras el anuncio: Diego Schalper (RN) lo llama "una gran noticia" por más de 200 obras públicas que adelanta, y Macarena Santelices (Republicanos) valora el alza de 4,7% para salud y listas de espera.</li>
+          <li><strong>El cuestionamiento numérico que subraya BioBioChile.</strong> El medio da voz a la oposición más crítica: Franco Parisi pregunta "¿dónde están los US$6.000 millones de ahorro... o era una metáfora?", y Andrea Macías (PS) advierte que "los números no cuadran" si el gasto sube 1,5% y a la vez se anuncia ajuste.</li>
+          <li><strong>La disputa metodológica que expone Radio U. de Chile.</strong> El medio añade una capa que nadie más recoge: la oposición no solo cuestiona el fondo, sino la "base de cálculo" que usa el Gobierno para medir el alza del 1,5%, abriendo un frente técnico además del político.</li>
+        </ol>
+        <div class="chips">
+          <a class="chip" href="https://radio.uchile.cl/2026/09/30/el-primer-debate-en-el-congreso-por-presupuesto-2027-oficialismo-valora-alza-de-15-y-oposicion-cuestiona-base-de-calculo/" target="_blank" rel="noopener">Radio U. de Chile ↗</a>
+          <a class="chip" href="https://www.df.cl/economia-y-politica/politica/kast-presenta-presupuesto-2027-con-alza-de-1-5-defiende-que-esta" target="_blank" rel="noopener">Diario Financiero ↗</a>
+          <a class="chip" href="https://www.eldinamo.cl/politica/2026/10/01/cuida-las-cuentas-fiscales-y-gobierno-apretado-y-en-aprietos-las-reacciones-politicas-al-presupuesto-2027" target="_blank" rel="noopener">El Dínamo ↗</a>
+          <a class="chip" href="https://www.biobiochile.cl/noticias/nacional/chile/2026/09/30/oposicion-fustiga-presupuesto-de-kast-cuestiona-recortes-y-pregunta-donde-estan-los-us6-mil-millones.shtml" target="_blank" rel="noopener">BioBioChile ↗</a>
+        </div>
+      </article>
+
+      <article class="story">
+        <div class="kicker">Economía — la "semana del terror" que el Presupuesto buscaba calmar</div>
+        <h3>El Imacec cae 1,0% y la minería se desploma 17,4%: el frente económico se endurece justo cuando el Gobierno necesitaba buenas noticias</h3>
+        <ol>
+          <li><strong>El hecho compartido.</strong> El Imacec de agosto retrocedió 1,0% interanual —segundo mes consecutivo en rojo—, arrastrado por una caída minera de 17,4% por menores leyes de mineral y condiciones climáticas adversas, según BioBioChile y El Dínamo.</li>
+          <li><strong>El bautizo acumulativo que acuña El Dínamo.</strong> El medio es el único que suma todos los frentes de la semana bajo una sola etiqueta —"la semana del terror" de La Moneda—, combinando el desempleo de 9,6%, el alza de combustibles y una caída de 5,7% en la producción industrial que los demás medios reportan por separado.</li>
+          <li><strong>La lectura empresarial que aporta CNN Chile.</strong> Franco Parisi calificó el dato como "pésima noticia" y pidió a Kast una mesa de trabajo urgente con la minería para "aprovechar la tremenda suerte" del precio histórico del cobre, un ángulo propositivo ausente en la cobertura más técnica de BioBioChile, que cita en cambio a economistas como Javier Mella hablando de "una economía débil".</li>
+          <li><strong>La crítica partidaria que añade El Ciudadano.</strong> Citando a la exministra del Trabajo Jara, el medio lleva el dato al terreno electoral: "100 mil puestos de trabajo es como la mitad de los que ya se han destruido", cuestionando la meta del plan "Chile Despega" desde una óptica que ni los economistas de BioBioChile ni el empresario Parisi plantean.</li>
+        </ol>
+        <div class="chips">
+          <a class="chip" href="https://www.biobiochile.cl/noticias/economia/actualidad-economica/2026/10/01/la-actividad-economica-en-chile-sigue-retrocediendo-con-un-nuevo-imacec-en-rojo.shtml" target="_blank" rel="noopener">BioBioChile ↗</a>
+          <a class="chip" href="https://www.eldinamo.cl/economia/2026/09/30/alza-del-desempleo-bencinas-e-imacec-la-semana-del-terror-de-la-moneda-en-materia-economica/" target="_blank" rel="noopener">El Dínamo ↗</a>
+          <a class="chip" href="https://www.cnnchile.com/pais/parisi-imacec-caida-mineria-mesa-trabajo-kast/" target="_blank" rel="noopener">CNN Chile ↗</a>
+          <a class="chip" href="https://www.elciudadano.com/chile/jara-golpea-plan-de-empleo-de-kast-100-mil-puestos-de-trabajo-es-como-la-mitad-de-los-que-ya-se-han-destruido/10/01/" target="_blank" rel="noopener">El Ciudadano ↗</a>
+        </div>
+      </article>
+
+      <article class="story">
+        <div class="kicker">Rotación de gobierno — ¿41 o 52 salidas? depende de qué se cuente</div>
+        <h3>Tres renuncias en un día reabren la cifra acumulada de bajas del gobierno Kast, que cambia según el medio y el criterio de conteo</h3>
+        <ol>
+          <li><strong>El hecho compartido.</strong> Tres funcionarios regionales —incluido el seremi de Economía de O'Higgins— renunciaron el mismo día, intensificando el patrón de rotación del Ejecutivo, según registran Emol, El Desconcierto e Interferencia.</li>
+          <li><strong>La cifra acotada de Emol y El Desconcierto.</strong> Ambos hablan de "41 seremis" en total renunciados desde marzo, contabilizando únicamente ese cargo específico.</li>
+          <li><strong>La cifra ampliada de Interferencia.</strong> El medio suma 52 salidas porque además de los 41 seremis incluye tres ministras, seis subsecretarios y un delegado provincial —no es un error de conteo, sino un criterio distinto que ningún otro medio explicita en su titular.</li>
+          <li><strong>El patrón de fondo que subraya Interferencia.</strong> El medio calcula "una baja cada cuatro días desde el 11 de marzo", un dato acumulativo de contexto que los medios centrados solo en la renuncia del día no ofrecen.</li>
+        </ol>
+        <div class="chips">
+          <a class="chip" href="https://interferencia.cl/articulos/tres-seremis-renuncian-en-una-sola-jornada-y-el-gobierno-de-kast-ya-suma-52-salidas" target="_blank" rel="noopener">Interferencia ↗</a>
+          <a class="chip" href="https://www.emol.com/noticias/Nacional/2026/09/30/1212890/renuncia-seremi-economia-ohiggins.html" target="_blank" rel="noopener">Emol ↗</a>
+          <a class="chip" href="https://eldesconcierto.cl/actualidad/tercera-renuncia-del-dia-gobierno-suma-nueva-baja-ohiggins-y-totaliza-41-seremis-salientes-n5462722" target="_blank" rel="noopener">El Desconcierto ↗</a>
+        </div>
+      </article>
+
+      <article class="story">
+        <div class="kicker">Bachelet, segundo acto — de la derrota en la ONU al tablero interno</div>
+        <h3>Tras el revés en la ONU, Bachelet se reinstala como comodín político: entusiasmo opositor, alerta en la derecha</h3>
+        <ol>
+          <li><strong>El hecho compartido.</strong> Bachelet descartó retirarse de la actividad política tras su fallida candidatura a la secretaría general de la ONU y afirmó que en Chile "necesitamos encontrarnos", según Emol.</li>
+          <li><strong>La lectura estratégica de El Mostrador.</strong> El medio la perfila como posible articuladora de una oposición fragmentada, de la DC al PC: un diputado socialista resume el ánimo con "no estamos para dejar jugadores buenos en la banca".</li>
+          <li><strong>La alerta en la derecha que recoge el mismo El Mostrador.</strong> Una diputada describe a Bachelet como "una articuladora profesional" y en RN temen que se convierta en "pilar fundamental reorganizando la oposición" —un temor ausente en el registro más factual de Emol.</li>
+          <li><strong>El tono introspectivo de Radio U. de Chile.</strong> En una columna, el medio pregunta "¿sirve de algo postular para perder?", situando el fracaso en la ONU en una reflexión sobre el costo político de intentar y no lograrlo, distinto al análisis de poder de Emol y El Mostrador.</li>
+        </ol>
+        <div class="chips">
+          <a class="chip" href="https://www.emol.com/noticias/Nacional/2026/09/30/1212900/bachelet-descarta-retirarse-politica-seguir.html" target="_blank" rel="noopener">Emol ↗</a>
+          <a class="chip" href="https://www.elmostrador.cl/noticias/pais/2026/09/30/factor-bachelet-cambia-animo-opositor-y-enciende-alertas-en-la-derecha/" target="_blank" rel="noopener">El Mostrador ↗</a>
+          <a class="chip" href="https://radio.uchile.cl/2026/09/20/bachelet-sirve-de-algo-postular-para-perder/" target="_blank" rel="noopener">Radio U. de Chile ↗</a>
+        </div>
+      </article>
+    </section>
+
+    <aside class="sidebar">
+      <section class="briefs">
+        <h2 class="section-label">Innovación &amp; Startups</h2>
+        <ul>
+          <li class="brief">
+            <span class="outlet">Diario Financiero (DF Lab)</span>
+            <a class="headline" href="https://www.df.cl/df-lab/innovacion-y-startups/chile-mantiene-el-puesto-51-en-el-mundo-y-el-liderazgo-regional-en-el" target="_blank" rel="noopener">Chile mantiene el puesto 51 en el mundo y el liderazgo regional en el Índice Global de Innovación</a>
+            <p>El país mejora en condiciones habilitantes pero retrocede en resultados concretos de innovación.</p>
+          </li>
+          <li class="brief">
+            <span class="outlet">CNN Chile</span>
+            <a class="headline" href="https://www.cnnchile.com/bits/google-lanza-gemini-4-argon-su-nuevo-modelo-de-ia-con-foco-en-la-ciberdefensa/" target="_blank" rel="noopener">Google lanza Gemini 4 Argon, su nuevo modelo de IA con foco en la ciberdefensa</a>
+            <p>El nuevo modelo prioriza la protección de infraestructuras digitales frente a amenazas emergentes.</p>
+          </li>
+          <li class="brief">
+            <span class="outlet">El Mostrador</span>
+            <a class="headline" href="https://www.elmostrador.cl/agenda-pais/agenda-digital/2026/09/30/erp-ia-automatizar-procesos-financieros/" target="_blank" rel="noopener">Los mejores 10 ERP para empresas en Chile</a>
+            <p>Un repaso a los sistemas de planificación empresarial con capacidades de automatización financiera e IA.</p>
+          </li>
+        </ul>
+      </section>
+
+      <section class="briefs">
+        <h2 class="section-label">Investigación &amp; Transparencia</h2>
+        <ul>
+          <li class="brief">
+            <span class="outlet">Reportea</span>
+            <a class="headline" href="https://reportea.cl/2026/09/30/fiscalia-logra-extraer-chats-de-telegram-desde-el-celular-de-hermosilla/" target="_blank" rel="noopener">Fiscalía logra extraer chats de Telegram desde el celular de Hermosilla</a>
+            <p>Técnicos de la Fiscalía Nacional lograron extraer las conversaciones del abogado, un paso clave tras sus declaraciones sobre pagos desde La Moneda.</p>
+          </li>
+          <li class="brief">
+            <span class="outlet">CIPER (Radar)</span>
+            <a class="headline" href="https://www.ciperchile.cl/2026/09/29/radar-29-09-26/" target="_blank" rel="noopener">Cámara aprueba compensación por medicamentos y pañales; Gobierno extiende bonos a transportistas y gendarme es condenado por ingreso de drogas a un penal</a>
+            <p>El radar más reciente de CIPER —sin actualización desde el martes— cruza alivios económicos puntuales con una condena por corrupción penitenciaria.</p>
+          </li>
+        </ul>
+      </section>
+
+      <section class="briefs">
+        <h2 class="section-label">Pensamiento &amp; Opinión</h2>
+        <ul>
+          <li class="brief">
+            <span class="outlet">El Dínamo (Opinión)</span>
+            <a class="headline" href="https://www.eldinamo.cl/opinion/2026/09/30/cuanto-futuro-estamos-pagando-hoy/" target="_blank" rel="noopener">¿Cuánto futuro estamos pagando hoy?</a>
+            <p>Columna sobre el costo —en miles de millones de dólares— de la infraestructura que sostiene a la inteligencia artificial.</p>
+          </li>
+          <li class="brief">
+            <span class="outlet">Ethic</span>
+            <a class="headline" href="https://ethic.es/nietos-maricarmen-descontento-intergeneracional" target="_blank" rel="noopener">Los nietos de Maricarmen: historia de un descontento intergeneracional</a>
+            <p>Ensayo sobre el malestar que salta de generación en generación en los movimientos sociales contemporáneos.</p>
+          </li>
+          <li class="brief">
+            <span class="outlet">CEP Chile</span>
+            <a class="headline" href="https://www.cepchile.cl/un-paso-mas-en-la-cruzada-nacional-por-el-empleo/" target="_blank" rel="noopener">Un paso más en la cruzada nacional por el empleo</a>
+            <p>Columna del centro de estudios sobre las estrategias de política laboral justo cuando el desempleo llega a su punto más alto en cinco años.</p>
+          </li>
+          <li class="brief">
+            <span class="outlet">El Desconcierto (Opinión)</span>
+            <a class="headline" href="https://eldesconcierto.cl/opinion/prostitucion-trata-y-desigualdad-las-razones-hablar-abolicion-n5462697" target="_blank" rel="noopener">Prostitución, trata y desigualdad: las razones para hablar de "abolición"</a>
+            <p>Análisis sobre las implicancias de la trata de personas y la desigualdad en el debate sobre la prostitución.</p>
+          </li>
+        </ul>
+      </section>
+    </aside>
+  </div>
+
+  <section class="pulse-section">
+    <h2 class="section-label">Pulso social — cómo reacciona la conversación pública</h2>
+    <p class="pulse-intro">La semana económica —Imacec en rojo, desempleo en 9,6%, Presupuesto 2027 recién presentado— golpea directamente el ánimo ciudadano. Pulso Ciudadano registra el derrumbe más marcado del año: la aprobación de Kast cae a 28,2% (-5,6 puntos) y la desaprobación sube a 57,6%, con la delincuencia (45,2%) y el desempleo (36,7%) como las dos principales preocupaciones. Criteria, con metodología propia, ubica la aprobación en 31% y registra que un 42% rechaza la adhesión de Chile al Escudo de las Américas. En redes, la cifra de desempleo se volvió munición política instantánea: el Frente Amplio la convirtió en consigna ("el Gobierno del desempleo") horas después de conocido el dato del INE, mientras la oposición en el Congreso exige en bloque un golpe de timón económico.</p>
+
+    <div class="sentiment-strip">
+      <div class="sentiment-bar" role="img" aria-label="Aprobación presidencial Pulso Ciudadano, septiembre 2026: 28,2% aprueba, 14,2% no sabe o no responde, 57,6% desaprueba">
+        <span class="seg-fav" style="width:28.2%"></span>
+        <span class="seg-neu" style="width:14.2%"></span>
+        <span class="seg-neg" style="width:57.6%"></span>
+      </div>
+      <div class="sentiment-legend">
+        <span><span class="dot fav"></span>Aprueba (Pulso Ciudadano) — 28,2%</span>
+        <span><span class="dot neu"></span>No sabe/no responde — 14,2%</span>
+        <span><span class="dot neg"></span>Desaprueba — 57,6%</span>
+      </div>
+    </div>
+
+    <div class="pulse-grid">
+      <div class="pulse-card">
+        <span class="outlet">BioBioChile</span>
+        <h4><a href="https://www.biobiochile.cl/noticias/nacional/chile/2026/09/27/pulso-ciudadano-aprobacion-de-kast-se-desploma-al-282-y-desaprobacion-alcanza-el-576.shtml" target="_blank" rel="noopener">Pulso Ciudadano: aprobación de Kast se desploma al 28,2% y desaprobación alcanza el 57,6%</a></h4>
+        <p>La encuesta registra la mayor caída mensual del año; delincuencia, desempleo e inflación encabezan las preocupaciones ciudadanas.</p>
+        <blockquote>"La delincuencia sigue siendo la principal preocupación, con un 45,2%. Le siguen el desempleo, 36,7%, la inflación, con 26,1%, y la corrupción con 18,8%"</blockquote>
+      </div>
+      <div class="pulse-card">
+        <span class="outlet">El Dínamo</span>
+        <h4><a href="https://www.eldinamo.cl/politica/2026/09/27/criteria-aprobacion-de-kast-alcanza-el-31-y-un-42-rechaza-adhesion-de-chile-al-escudo-de-las-americas/" target="_blank" rel="noopener">Criteria: aprobación de Kast alcanza el 31% y un 42% rechaza adhesión de Chile al Escudo de las Américas</a></h4>
+        <p>La encuestadora marca una cifra distinta a Pulso Ciudadano, pero coincide en el deterioro: 58% desaprueba la gestión presidencial.</p>
+      </div>
+      <div class="pulse-card">
+        <span class="outlet">Frente Amplio en X</span>
+        <h4><a href="https://x.com/elfrente_amplio/status/2105290218396151952" target="_blank" rel="noopener">"9,6% de desempleo. El Gobierno del desempleo"</a></h4>
+        <p>La colectividad convirtió la cifra del INE en consigna política apenas horas después de conocido el dato, con alcance viral en la discusión digital del día.</p>
+        <blockquote>"Ya son cinco mediciones consecutivas con el desempleo sobre el 9% y, en un año, se destruyeron 88 mil empleos formales. Chile necesita empleos ahora, no promesas para el próximo año"</blockquote>
+      </div>
+      <div class="pulse-card">
+        <span class="outlet">BioBioChile</span>
+        <h4><a href="https://www.biobiochile.cl/noticias/nacional/chile/2026/09/30/oposicion-exige-a-kast-un-giro-economico-ante-alza-de-desempleo-basta-de-excusas-sean-gobierno.shtml" target="_blank" rel="noopener">Oposición exige a Kast un giro económico ante alza de desempleo: "Basta de excusas, ¡sean Gobierno!"</a></h4>
+        <p>Gael Yeomans (Frente Amplio) calificó la cifra como "un nuevo récord de mala gestión" y exigió soluciones inmediatas, no promesas a futuro.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="next-edition">Próxima edición: viernes 2 de octubre de 2026</div>
+    <div class="colophon">
+      Fuentes monitoreadas: <span class="sources-list">Radio U. de Chile · Diario Financiero · CIPER Chile · Interferencia · Ethic · El Mostrador · BioBioChile · El Ciudadano · CEP Chile · El Desconcierto · Emol · El Dínamo · Reportea · CNN Chile · 24 Horas · El País · Publimetro</span>. Curaduría y síntesis comparativa generadas automáticamente a partir de portadas públicas del día (El País no respondió hoy por bloqueo de acceso del entorno). El pulso social usa encuestas y reportes de terceros, citados con su fuente — no scraping directo de Reddit o X, bloqueado para este entorno.
+    </div>
+  </footer>
+
+</div>
+
+
+</body>
+</html>
