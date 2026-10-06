@@ -1,0 +1,40 @@
+{
+  "permissions": {
+    "allow": [
+      "WebSearch",
+      "WebFetch(domain:radio.uchile.cl)",
+      "WebFetch(domain:www.df.cl)",
+      "WebFetch(domain:df.cl)",
+      "WebFetch(domain:www.ciperchile.cl)",
+      "WebFetch(domain:ciperchile.cl)",
+      "WebFetch(domain:interferencia.cl)",
+      "WebFetch(domain:www.interferencia.cl)",
+      "WebFetch(domain:ethic.es)",
+      "WebFetch(domain:www.ethic.es)",
+      "WebFetch(domain:www.elmostrador.cl)",
+      "WebFetch(domain:elmostrador.cl)",
+      "WebFetch(domain:www.biobiochile.cl)",
+      "WebFetch(domain:biobiochile.cl)",
+      "WebFetch(domain:www.elciudadano.com)",
+      "WebFetch(domain:elciudadano.com)",
+      "WebFetch(domain:www.cepchile.cl)",
+      "WebFetch(domain:cepchile.cl)",
+      "WebFetch(domain:eldesconcierto.cl)",
+      "WebFetch(domain:www.eldesconcierto.cl)",
+      "WebFetch(domain:www.emol.com)",
+      "WebFetch(domain:emol.com)",
+      "WebFetch(domain:www.eldinamo.cl)",
+      "WebFetch(domain:eldinamo.cl)",
+      "WebFetch(domain:reportea.cl)",
+      "WebFetch(domain:www.reportea.cl)",
+      "WebFetch(domain:www.cnnchile.com)",
+      "WebFetch(domain:cnnchile.com)",
+      "WebFetch(domain:www.24horas.cl)",
+      "WebFetch(domain:24horas.cl)",
+      "WebFetch(domain:elpais.com)",
+      "WebFetch(domain:www.elpais.com)",
+      "WebFetch(domain:www.publimetro.cl)",
+      "WebFetch(domain:publimetro.cl)"
+    ]
+  }
+}
