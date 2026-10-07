@@ -1,7 +1,8 @@
 # Resumen de Prensa Chile
 
 Resumen diario (lunes a viernes) de prensa chilena: noticias que se repiten entre medios, contraste de enfoques,
-innovación/startups, investigación y transparencia, opinión, y un "Pulso social" con encuestas y reacciones ciudadanas.
+innovación/startups, investigación y transparencia, opinión, un "Pulso social" con encuestas y reacciones ciudadanas, y
+una sección "Pensamiento y humanidades" con lecturas de Ethic (ethic.es) debajo del Pulso social.
 
 Sitio estático (HTML/CSS puro, sin build ni dependencias) publicado con **GitHub Pages**.
 

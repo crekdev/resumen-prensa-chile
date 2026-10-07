@@ -387,6 +387,65 @@
     color: var(--ink-faint);
   }
 
+  /* ---------- Pensamiento y humanidades (Ethic) ---------- */
+  .thought-section {
+    margin-top: 2.4rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--line);
+  }
+  .thought-intro {
+    max-width: 780px;
+    font-size: 0.98rem;
+    line-height: 1.55;
+    color: var(--ink-soft);
+    margin: 0 0 1.5rem;
+  }
+  .thought-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.8rem 2.2rem;
+  }
+  @media (max-width: 700px) {
+    .thought-grid { grid-template-columns: 1fr; }
+  }
+  .thought-card { min-width: 0; }
+  .thought-card .kicker {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.66rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--navy-soft);
+    display: block;
+    margin-bottom: 0.35rem;
+  }
+  .thought-card h4 {
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 600;
+    font-size: 1.12rem;
+    line-height: 1.3;
+    margin: 0 0 0.5rem;
+    color: var(--ink);
+    text-wrap: balance;
+  }
+  .thought-card h4 a { color: inherit; text-decoration: none; }
+  .thought-card h4 a:hover { color: var(--oxblood); }
+  .thought-card p {
+    font-size: 0.92rem;
+    line-height: 1.55;
+    color: var(--ink-soft);
+    margin: 0;
+  }
+  .thought-card blockquote {
+    margin: 0.6rem 0 0;
+    padding-left: 0.7rem;
+    border-left: 2px solid var(--oxblood);
+    font-family: 'Fraunces', Georgia, serif;
+    font-style: italic;
+    font-size: 0.95rem;
+    line-height: 1.45;
+    color: var(--ink);
+  }
+
   /* ---------- Footer ---------- */
   .footer {
     margin-top: 2.75rem;
@@ -674,6 +733,37 @@
         <span class="outlet">Emol</span>
         <h4><a href="https://www.emol.com/noticias/Nacional/2026/10/05/1213284/termometro-salud-mental-chilenos-resultados.html" target="_blank" rel="noopener">Salud mental alcanza sus peores niveles desde la pandemia</a></h4>
         <p>Más depresión, ansiedad, insomnio y soledad, según el termómetro de salud mental.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="thought-section" id="pensamiento">
+    <h2 class="section-label">Pensamiento y humanidades — ideas de Ethic</h2>
+    <p class="thought-intro">Una pausa del ruido de la coyuntura: cuatro lecturas de Ethic, la revista española de pensamiento, sobre democracia, lenguaje, atención y confianza. No son prensa chilena; son ideas para leer con calma.</p>
+
+    <div class="thought-grid">
+      <div class="thought-card">
+        <span class="kicker">Pensamiento · Manuel Arias Maldonado</span>
+        <h4><a href="https://ethic.es/podemos-salvar-democracia-liberal" target="_blank" rel="noopener">¿Podemos salvar la democracia liberal?</a></h4>
+        <p>La democracia liberal solo se salvará si hay suficientes demócratas dispuestos a defenderla, lo que exige ciudadanos menos dependientes de sus líderes. La amenaza es sobre todo interna: votantes que dicen valorarla y respaldan en las urnas a quienes la erosionan.</p>
+        <blockquote>“La democracia liberal solo puede salvarse si hay demócratas suficientes para defenderla.”</blockquote>
+      </div>
+      <div class="thought-card">
+        <span class="kicker">Pensamiento · Rosa Gutiérrez</span>
+        <h4><a href="https://ethic.es/tecnificacion-del-lenguaje" target="_blank" rel="noopener">La tecnificación del lenguaje</a></h4>
+        <p>El lenguaje no refleja la realidad de forma pasiva, la configura: los conflictos humanos no desaparecen, cambian de vocabulario, y la jerga gerencial los oculta tras una falsa neutralidad, también en el terreno amoroso.</p>
+        <blockquote>“No podemos tratar lo más íntimo como algo a optimizarse ni mucho menos a protocolizarse.”</blockquote>
+      </div>
+      <div class="thought-card">
+        <span class="kicker">Pensamiento · Antonio Legaz · 24 sep 2026</span>
+        <h4><a href="https://ethic.es/arte-estar-siempre-al-dia" target="_blank" rel="noopener">El arte de estar siempre al día</a></h4>
+        <p>Hay más información que nunca, pero el recurso escaso es la atención: se confunde estar informado con pensar, y pensar exige un tiempo lento de comparar y juzgar que la actualidad constante no deja.</p>
+      </div>
+      <div class="thought-card">
+        <span class="kicker">Entrevista · Pedro Silverio con Victoria Camps · 27 oct 2025</span>
+        <h4><a href="https://ethic.es/entrevista-victoria-camps-desconfianza" target="_blank" rel="noopener">Victoria Camps: «Con la secularización, nada ha sustituido lo que hacía la religión para vincular a las personas con un sentido moral»</a></h4>
+        <p>La filósofa atribuye la desconfianza social a una idea de libertad muy individualista y a la falta de vínculos y cooperación, y propone reformas graduales en vez de diseñar una sociedad ideal.</p>
+        <blockquote>«Lo que nos hará recuperar la confianza es pasar de los principios a los hechos.»</blockquote>
       </div>
     </div>
   </section>
