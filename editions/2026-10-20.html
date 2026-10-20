@@ -1,0 +1,798 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Resumen diario de prensa chilena: noticias cruzadas entre 17 medios, contraste de enfoques y pulso social. Edición de lunes a viernes.">
+<title>Resumen de Prensa Chile</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Source+Sans+3:ital,wght@0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+
+  :root {
+    --paper: #f2eee1;
+    --paper-2: #e9e1cc;
+    --paper-3: #ddd2b3;
+    --ink: #211d16;
+    --ink-soft: #5c5643;
+    --ink-faint: #8b836b;
+    --oxblood: #7c1f2b;
+    --oxblood-deep: #5a1420;
+    --oxblood-tint: #f4e2e0;
+    --navy: #1d2c46;
+    --navy-soft: #3d5075;
+    --navy-tint: #e3e6ee;
+    --forest: #2c5c41;
+    --forest-tint: #e1ebe3;
+    --line: #c7b998;
+    --line-soft: #dcd2b4;
+    --shadow: rgba(33, 29, 22, 0.1);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper: #17140f;
+      --paper-2: #211c14;
+      --paper-3: #2b2419;
+      --ink: #ece4d1;
+      --ink-soft: #b8ad91;
+      --ink-faint: #8a8067;
+      --oxblood: #e0818c;
+      --oxblood-deep: #ec9aa3;
+      --oxblood-tint: #3a2024;
+      --navy: #90aede;
+      --navy-soft: #6f8dc0;
+      --navy-tint: #1e2636;
+      --forest: #7fb494;
+      --forest-tint: #1c2b21;
+      --line: #4a4230;
+      --line-soft: #332c1f;
+      --shadow: rgba(0, 0, 0, 0.4);
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --paper: #17140f;
+    --paper-2: #211c14;
+    --paper-3: #2b2419;
+    --ink: #ece4d1;
+    --ink-soft: #b8ad91;
+    --ink-faint: #8a8067;
+    --oxblood: #e0818c;
+    --oxblood-deep: #ec9aa3;
+    --oxblood-tint: #3a2024;
+    --navy: #90aede;
+    --navy-soft: #6f8dc0;
+    --navy-tint: #1e2636;
+    --forest: #7fb494;
+    --forest-tint: #1c2b21;
+    --line: #4a4230;
+    --line-soft: #332c1f;
+    --shadow: rgba(0, 0, 0, 0.4);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--paper-3);
+    color: var(--ink);
+    font-family: 'Source Sans 3', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .page {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 2.5rem 1.75rem 3.5rem;
+    background: var(--paper);
+  }
+
+  a { color: var(--navy); text-decoration-color: var(--line); text-underline-offset: 2px; }
+  a:hover { color: var(--oxblood); text-decoration-color: var(--oxblood); }
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--oxblood); outline-offset: 2px; }
+
+  /* ---------- Masthead ---------- */
+  .ear {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: 0.9rem;
+  }
+
+  .masthead { text-align: center; }
+
+  .masthead .kicker {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--oxblood);
+    margin-bottom: 0.6rem;
+  }
+
+  .title {
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 700;
+    font-optical-sizing: auto;
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    letter-spacing: -0.01em;
+    line-height: 0.95;
+    margin: 0 0 0.85rem;
+    color: var(--ink);
+    text-wrap: balance;
+  }
+
+  .dateline {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.55rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.78rem;
+    color: var(--ink-soft);
+  }
+
+  .dateline .edition { color: var(--oxblood); font-weight: 600; }
+  .dateline .divider { color: var(--line); }
+
+  .rule-thick {
+    height: 4px;
+    background: var(--ink);
+    margin: 1.4rem 0 0.35rem;
+  }
+  .rule-thin {
+    height: 1px;
+    background: var(--line);
+    margin: 0.35rem 0 0;
+  }
+  .rule-hair {
+    height: 1px;
+    background: var(--line-soft);
+  }
+
+  /* ---------- Lead ---------- */
+  .lead {
+    padding: 1.6rem 0 1.2rem;
+    max-width: 880px;
+    margin: 0 auto;
+  }
+  .lead p {
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 500;
+    font-size: clamp(1.15rem, 1.9vw, 1.5rem);
+    line-height: 1.5;
+    color: var(--ink);
+    margin: 0;
+    text-wrap: pretty;
+  }
+  .dropcap {
+    float: left;
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 700;
+    font-size: 3.6rem;
+    line-height: 0.8;
+    padding: 0.1rem 0.35rem 0 0;
+    color: var(--oxblood);
+  }
+
+  /* ---------- Layout ---------- */
+  .grid {
+    display: grid;
+    grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+    gap: 0 2.75rem;
+    margin-top: 1.8rem;
+    align-items: start;
+  }
+  @media (max-width: 860px) {
+    .grid { grid-template-columns: 1fr; gap: 2.25rem 0; }
+  }
+
+  .section-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--oxblood);
+    margin: 0 0 1rem;
+    padding-bottom: 0.55rem;
+    border-bottom: 2px solid var(--ink);
+  }
+
+  /* ---------- Story cards ---------- */
+  .stories { min-width: 0; }
+  .story + .story { margin-top: 1.9rem; padding-top: 1.9rem; border-top: 1px solid var(--line); }
+
+  .story .kicker {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--navy-soft);
+    margin-bottom: 0.5rem;
+  }
+
+  .story h3 {
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 600;
+    font-size: clamp(1.2rem, 2vw, 1.55rem);
+    line-height: 1.25;
+    margin: 0 0 0.85rem;
+    color: var(--ink);
+    text-wrap: balance;
+  }
+
+  .story ol {
+    margin: 0 0 1rem;
+    padding-left: 1.2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+  }
+  .story li {
+    font-size: 0.98rem;
+    line-height: 1.58;
+    color: var(--ink-soft);
+    padding-left: 0.15rem;
+  }
+  .story li::marker {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.85rem;
+    color: var(--oxblood);
+    font-weight: 600;
+  }
+  .story li a { color: var(--navy); font-weight: 600; }
+  .story li strong { color: var(--ink); }
+
+  .chips { display: flex; flex-wrap: wrap; gap: 0.45rem; }
+  .chip {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.03em;
+    color: var(--navy);
+    background: var(--navy-tint);
+    border: 1px solid var(--line);
+    padding: 0.28rem 0.6rem;
+    border-radius: 3px;
+    text-decoration: none;
+  }
+  .chip:hover { background: var(--oxblood-tint); border-color: var(--oxblood); color: var(--oxblood-deep); }
+
+  /* ---------- Sidebar briefs ---------- */
+  .sidebar { display: flex; flex-direction: column; gap: 2.2rem; }
+  .briefs ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
+  .brief { padding: 0.95rem 0; border-bottom: 1px solid var(--line-soft); }
+  .brief:first-child { padding-top: 0; }
+  .brief:last-child { border-bottom: none; }
+
+  .brief .outlet {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.66rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--oxblood);
+    display: block;
+    margin-bottom: 0.3rem;
+  }
+  .brief a.headline {
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 600;
+    font-size: 1.02rem;
+    line-height: 1.32;
+    color: var(--ink);
+    text-decoration: none;
+    display: block;
+    margin-bottom: 0.35rem;
+    text-wrap: balance;
+  }
+  .brief a.headline:hover { color: var(--oxblood); }
+  .brief p {
+    font-size: 0.88rem;
+    line-height: 1.5;
+    color: var(--ink-soft);
+    margin: 0;
+  }
+
+  /* ---------- Pulso Social ---------- */
+  .pulse-section {
+    margin-top: 2.4rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--line);
+  }
+  .pulse-intro {
+    max-width: 780px;
+    font-size: 0.98rem;
+    line-height: 1.55;
+    color: var(--ink-soft);
+    margin: 0 0 1.5rem;
+  }
+
+  .sentiment-strip {
+    display: flex;
+    align-items: center;
+    gap: 1.1rem;
+    margin-bottom: 1.9rem;
+    flex-wrap: wrap;
+  }
+  .sentiment-bar {
+    flex: 1 1 260px;
+    max-width: 420px;
+    height: 10px;
+    border-radius: 5px;
+    overflow: hidden;
+    display: flex;
+    border: 1px solid var(--line);
+  }
+  .sentiment-bar span { display: block; height: 100%; }
+  .seg-neg { background: var(--oxblood); }
+  .seg-neu { background: var(--line-soft); }
+  .seg-fav { background: var(--forest); }
+  .sentiment-legend {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--ink-soft);
+  }
+  .sentiment-legend .dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 0.35rem; }
+  .sentiment-legend .dot.neg { background: var(--oxblood); }
+  .sentiment-legend .dot.neu { background: var(--line-soft); border: 1px solid var(--line); }
+  .sentiment-legend .dot.fav { background: var(--forest); }
+
+  .pulse-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.6rem 2.2rem;
+  }
+  @media (max-width: 700px) {
+    .pulse-grid { grid-template-columns: 1fr; }
+  }
+  .pulse-card { min-width: 0; }
+  .pulse-card .outlet {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.66rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--forest);
+    display: block;
+    margin-bottom: 0.35rem;
+  }
+  .pulse-card h4 {
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 600;
+    font-size: 1.08rem;
+    line-height: 1.3;
+    margin: 0 0 0.5rem;
+    color: var(--ink);
+  }
+  .pulse-card h4 a { color: inherit; text-decoration: none; }
+  .pulse-card h4 a:hover { color: var(--oxblood); }
+  .pulse-card p {
+    font-size: 0.92rem;
+    line-height: 1.55;
+    color: var(--ink-soft);
+    margin: 0;
+  }
+  .pulse-card blockquote {
+    margin: 0.55rem 0 0;
+    padding-left: 0.7rem;
+    border-left: 2px solid var(--line);
+    font-style: italic;
+    font-size: 0.88rem;
+    color: var(--ink-faint);
+  }
+
+  /* ---------- Pensamiento y humanidades (Ethic) ---------- */
+  .thought-section {
+    margin-top: 2.4rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--line);
+  }
+  .thought-intro {
+    max-width: 780px;
+    font-size: 0.98rem;
+    line-height: 1.55;
+    color: var(--ink-soft);
+    margin: 0 0 1.5rem;
+  }
+  .thought-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.8rem 2.2rem;
+  }
+  @media (max-width: 700px) {
+    .thought-grid { grid-template-columns: 1fr; }
+  }
+  .thought-card { min-width: 0; }
+  .thought-card .kicker {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.66rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--navy-soft);
+    display: block;
+    margin-bottom: 0.35rem;
+  }
+  .thought-card h4 {
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 600;
+    font-size: 1.12rem;
+    line-height: 1.3;
+    margin: 0 0 0.5rem;
+    color: var(--ink);
+    text-wrap: balance;
+  }
+  .thought-card h4 a { color: inherit; text-decoration: none; }
+  .thought-card h4 a:hover { color: var(--oxblood); }
+  .thought-card p {
+    font-size: 0.92rem;
+    line-height: 1.55;
+    color: var(--ink-soft);
+    margin: 0;
+  }
+  .thought-card blockquote {
+    margin: 0.6rem 0 0;
+    padding-left: 0.7rem;
+    border-left: 2px solid var(--oxblood);
+    font-family: 'Fraunces', Georgia, serif;
+    font-style: italic;
+    font-size: 0.95rem;
+    line-height: 1.45;
+    color: var(--ink);
+  }
+
+  /* ---------- Footer ---------- */
+  .footer {
+    margin-top: 2.75rem;
+    padding-top: 1.4rem;
+    border-top: 4px solid var(--ink);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 1rem 2rem;
+  }
+  .next-edition {
+    font-family: 'Fraunces', Georgia, serif;
+    font-style: italic;
+    font-weight: 500;
+    font-size: 1.05rem;
+    color: var(--oxblood-deep);
+  }
+  .colophon {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    line-height: 1.65;
+    color: var(--ink-faint);
+    max-width: 640px;
+  }
+  .colophon .sources-list { color: var(--ink-soft); }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .chip, .brief a.headline, a { transition: color 0.15s ease, background 0.15s ease, border-color 0.15s ease; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="ear">
+    <span>Edición chilena · circulación digital</span>
+    <span>Publicación de lunes a viernes</span>
+  </div>
+
+  <header class="masthead">
+    <div class="kicker">Prensa nacional en contraste</div>
+    <h1 class="title">Resumen de Prensa Chile</h1>
+    <div class="dateline">
+      <span class="edition">Edición N.º 30</span>
+      <span class="divider">·</span>
+      <span class="date">Martes 20 de octubre de 2026</span>
+      <span class="divider">·</span>
+      <span>17 medios monitoreados</span>
+    </div>
+  </header>
+
+  <div class="rule-thick"></div>
+  <div class="rule-thin"></div>
+
+  <section class="lead">
+    <p><span class="dropcap">L</span>a alerta roja por lluvias en la Región Metropolitana, con Metro interrumpido y evacuaciones preventivas, comparte portada con la decisión de la Superintendencia de Pensiones de abrir procesos sancionatorios contra las siete AFP por el Fondo E. El Gobierno endurece el tono en seguridad y migración, la reforma al INDH divide a la oposición y al oficialismo, y la oposición socialista saca a Araya de la Comisión de Constitución mientras Arenas llega a la Segegob.</p>
+  </section>
+
+  <div class="grid">
+    <section class="stories">
+      <h2 class="section-label">Noticias cruzadas</h2>
+
+      <article class="story">
+        <div class="kicker">Sistema frontal — alerta roja en la RM</div>
+        <h3>Alerta roja en la Región Metropolitana: lluvias, granizos, Metro interrumpido y evacuaciones preventivas por riesgo de nuevos aluviones</h3>
+        <ol>
+          <li><strong>El hecho compartido.</strong> CNN Chile, Publimetro y El Desconcierto informan que Senapred decretó alerta roja para la Región Metropolitana por lluvias y tormentas eléctricas; El Mostrador agrega que se prevén hasta 40 mm en cinco regiones.</li>
+          <li><strong>El impacto en la ciudad.</strong> Emol describe tormentas eléctricas, granizo y colapso por aguas servidas; CNN Chile consigna el cierre de una estación de la Línea 2 del Metro y Publimetro, el cierre de la Línea 1 con buses de apoyo; 24 Horas y El Dínamo detallan las comunas sin clases.</li>
+          <li><strong>Evacuaciones.</strong> El Dínamo informa la hora límite fijada por el Gobierno para evacuar viviendas en Las Condes, además de evacuaciones preventivas en Lo Barnechea, Puente Alto y Talagante.</li>
+          <li><strong>La lectura de fondo.</strong> El Mostrador recoge a científicos que hablan de «un evento que ocurre muy rara vez en un siglo»; Publimetro explica cómo una emergencia climática puede desencadenar otra; El Desconcierto publica columnas sobre la debilidad de la institucionalidad ambiental frente a los desastres.</li>
+        </ol>
+        <div class="chips">
+          <a class="chip" href="https://www.cnnchile.com/pais/sistema-frontal-senapred-declara-alerta-roja-para-la-region-metropolitana-por-lluvias/" target="_blank" rel="noopener">CNN Chile (alerta roja) ↗</a>
+          <a class="chip" href="https://www.publimetro.cl/noticias/2026/10/20/decretan-alerta-roja-en-la-region-metropolitana-por-fuertes-lluvias-y-granizos/" target="_blank" rel="noopener">Publimetro (alerta roja) ↗</a>
+          <a class="chip" href="https://eldesconcierto.cl/actualidad/senapred-decreta-alerta-roja-region-metropolitana-intensificacion-lluvias-y-tormentas-electricas-n5463298" target="_blank" rel="noopener">El Desconcierto (Senapred) ↗</a>
+          <a class="chip" href="https://www.elmostrador.cl/noticias/pais/2026/10/20/alerta-por-lluvias-intensas-en-cinco-regiones-preven-hasta-40-mm-y-riesgo-de-nuevos-aluviones/" target="_blank" rel="noopener">El Mostrador (5 regiones) ↗</a>
+          <a class="chip" href="https://www.emol.com/noticias/Nacional/2026/10/20/1214680/como-se-siente-sistema-frontal.html" target="_blank" rel="noopener">Emol (estragos) ↗</a>
+          <a class="chip" href="https://www.eldinamo.cl/pais/2026/10/20/la-hora-limite-que-puso-el-gobierno-para-evacuar-las-viviendas-afectadas-por-el-aluvion-en-las-condes/" target="_blank" rel="noopener">El Dínamo (evacuación) ↗</a>
+          <a class="chip" href="https://www.24horas.cl/actualidad/nacional/clases-suspendidas-hoy-comunas" target="_blank" rel="noopener">24 Horas (clases) ↗</a>
+          <a class="chip" href="https://www.elmostrador.cl/cultura/ciencia-cultura/2026/10/20/un-evento-que-ocurre-muy-rara-vez-en-un-siglo-cientificos-analizan-aluviones-y-lluvias-extremas/" target="_blank" rel="noopener">El Mostrador (científicos) ↗</a>
+          <a class="chip" href="https://www.publimetro.cl/noticias/2026/10/20/lluvias-incendios-y-aluviones-como-una-emergencia-climatica-puede-desencadenar-otra-en-chile/" target="_blank" rel="noopener">Publimetro (emergencias) ↗</a>
+        </div>
+      </article>
+
+      <article class="story">
+        <div class="kicker">Fondo E — sanciones y responsabilidades</div>
+        <h3>La Superintendencia abre procesos sancionatorios contra las siete AFP por el Fondo E, y el debate se traslada a quién responde: administradoras, fiscalizadores o el Gobierno anterior</h3>
+        <ol>
+          <li><strong>El hecho compartido.</strong> El Mostrador, CNN Chile, El Desconcierto y Radio U. de Chile informan que la Superintendencia de Pensiones inició procesos sancionatorios contra las siete AFP por las pérdidas en los fondos D y E; Radio U. de Chile precisa que el ministro Quiroz respalda la investigación «en un 100%».</li>
+          <li><strong>El Congreso.</strong> Emol registra que parlamentarios de los republicanos al Frente Amplio respaldan la investigación; CNN Chile informa que la presidenta del Senado convocará una sesión especial; El Ciudadano consigna el proyecto «Devuelvan la plata» de diputados del PC para obligar a las AFP a restituir las pérdidas.</li>
+          <li><strong>Quién carga con la culpa.</strong> El Dínamo señala que el Gobierno apunta a Boric, mira a las AFP y evita comprometer sanciones; El Ciudadano recoge al exministro Marcel, que culpa a las AFP y plantea compensar a los afectados.</li>
+          <li><strong>La mirada económica.</strong> En Emol, la columna de Salvador Valdés se pregunta si el Fondo E fue «cobertura o apuesta temeraria».</li>
+        </ol>
+        <div class="chips">
+          <a class="chip" href="https://www.elmostrador.cl/noticias/pais/2026/10/20/superintendencia-de-pensiones-abre-procesos-sancionatorios-contra-siete-afp-por-perdidas-en-fondo-e/" target="_blank" rel="noopener">El Mostrador (siete AFP) ↗</a>
+          <a class="chip" href="https://www.cnnchile.com/pais/afp-fondo-e-superintendencia-de-pensiones-inicia-procesos-sancionatorios-contra-las-siete-por-perdidas-de-valor-en-los-fondos/" target="_blank" rel="noopener">CNN Chile (sanciones) ↗</a>
+          <a class="chip" href="https://radio.uchile.cl/2026/10/20/caida-del-fondo-e-quiroz-asegura-que-respaldan-en-un-100-la-investigacion-de-la-superintendencia-de-pensiones/" target="_blank" rel="noopener">Radio U. de Chile (Quiroz) ↗</a>
+          <a class="chip" href="https://www.emol.com/noticias/Nacional/2026/10/20/1214669/republicanos-fa-investigacion-afp.html" target="_blank" rel="noopener">Emol (parlamentarios) ↗</a>
+          <a class="chip" href="https://www.cnnchile.com/pais/aulina-nunez-convocara-sesion-especial-del-senado-por-perdidas-del-fondo-e-de-las-afp-tras-solicitudes-del-oficialismo-y-la-oposicion/" target="_blank" rel="noopener">CNN Chile (Senado) ↗</a>
+          <a class="chip" href="https://www.elciudadano.com/economia/nadie-las-obligo-marcel-culpa-a-las-afp-por-perdidas-del-fondo-e-y-plantea-compensar-a-los-afectados/10/20/" target="_blank" rel="noopener">El Ciudadano (Marcel) ↗</a>
+          <a class="chip" href="https://www.elciudadano.com/politica/parlamentarios-pc-presentan-proyecto-devuelvan-la-plata-para-obligar-a-las-afp-a-restituir-perdidas-millonarias-de-los-fondos-de-pensiones/10/19/" target="_blank" rel="noopener">El Ciudadano (PC) ↗</a>
+          <a class="chip" href="https://www.eldinamo.cl/politica/2026/10/19/fondo-e-gobierno-apunta-a-boric-y-evita-comprometer-sanciones/" target="_blank" rel="noopener">El Dínamo (Gobierno) ↗</a>
+          <a class="chip" href="https://www.elmercurio.com/blogs/2026/10/19/136086/fondoe-cobertura-o-apuesta-temeraria.aspx" target="_blank" rel="noopener">Emol (Valdés) ↗</a>
+        </div>
+      </article>
+
+      <article class="story">
+        <div class="kicker">Derechos humanos — reforma al INDH</div>
+        <h3>La reforma que quita facultades al INDH divide aguas: su director habla de «grave retroceso» y el Gobierno la defiende como reordenamiento</h3>
+        <ol>
+          <li><strong>El hecho compartido.</strong> El Dínamo, CNN Chile y Radio U. de Chile cubren el proyecto del Ejecutivo sobre el Instituto Nacional de Derechos Humanos.</li>
+          <li><strong>La crítica.</strong> El Dínamo recoge al director Yerko Ljubetic: «Daña la democracia»; CNN Chile titula que el proyecto «quita facultades» y «afecta gravemente la autonomía»; la columna del director de Radio U. de Chile, Patricio López, lo califica de «grave intento de desmantelar el INDH».</li>
+          <li><strong>La defensa.</strong> El Dínamo informa que La Moneda defiende la reforma, que implica sin facultad de querellarse y con menos miembros y recursos, y que el ministro Rabat evitó vincular los cambios con las querellas previas del organismo.</li>
+        </ol>
+        <div class="chips">
+          <a class="chip" href="https://www.eldinamo.cl/politica/2026/10/20/dana-la-democracia-director-del-indh-critico-la-reforma-al-organismo-impulsada-por-el-ejecutivo/" target="_blank" rel="noopener">El Dínamo (Ljubetic) ↗</a>
+          <a class="chip" href="https://www.cnnchile.com/pais/director-del-indh-critica-proyecto-del-gobierno-que-quita-facultades-al-organismo-afecta-gravemente-la-autonomia-mutila-atribuciones-relevantes/" target="_blank" rel="noopener">CNN Chile (autonomía) ↗</a>
+          <a class="chip" href="https://radio.uchile.cl/2026/10/20/grave-intento-de-desmantelar-el-indh/" target="_blank" rel="noopener">Radio U. de Chile (López) ↗</a>
+          <a class="chip" href="https://www.eldinamo.cl/politica/2026/10/19/sin-facultad-de-querellarse-y-menos-miembros-y-recursos-la-moneda-defiende-reforma-al-indh/" target="_blank" rel="noopener">El Dínamo (defensa) ↗</a>
+        </div>
+      </article>
+
+      <article class="story">
+        <div class="kicker">Seguridad y migración — tras el 18-O</div>
+        <h3>Kast endurece el tono: expulsión de extranjeros detenidos, presión por la retención de migrantes y una semana marcada por la delincuencia</h3>
+        <ol>
+          <li><strong>El hecho compartido.</strong> El Mostrador y 24 Horas informan que el Presidente instruyó medidas y expulsiones de extranjeros detenidos por los incidentes de la conmemoración del estallido; CIPER (Radar del 19 de octubre) abre su resumen con las expulsiones.</li>
+          <li><strong>El tono presidencial.</strong> Emol recoge su frase «No cobren cuentas políticas con cargo al dolor de los chilenos»; BioBioChile cita su emplazamiento a diputados que rechazaron ampliar la retención de migrantes: «Que se hagan cargo».</li>
+          <li><strong>La delincuencia.</strong> Mostrador, Emol, El Dínamo, 24 Horas y Publimetro cubren la encerrona a la periodista Mónica Rincón; CNN Chile y El Desconcierto informan 59 detenidos en la operación «Veta Roja» por robo de cobre (El Mostrador habla de más de 40) y que un excarabinero sería su líder.</li>
+          <li><strong>Lo legislativo.</strong> Emol informa que la Cámara aprobó el proyecto de carrera de Carabineros; CNN Chile, que una comisión del Senado aprobó endurecer sanciones por atentados a policías y gendarmes.</li>
+        </ol>
+        <div class="chips">
+          <a class="chip" href="https://www.elmostrador.cl/noticias/pais/2026/10/20/presidente-kast-anuncio-medidas-contra-extranjeros-que-participaron-en-aniversario-del-18-o/" target="_blank" rel="noopener">El Mostrador (extranjeros) ↗</a>
+          <a class="chip" href="https://www.24horas.cl/actualidad/nacional/presidente-kast-instruye-expulsar-extranjeros-detenidos-incidentes-estallido-social" target="_blank" rel="noopener">24 Horas (expulsiones) ↗</a>
+          <a class="chip" href="https://www.ciperchile.cl/2026/10/19/radar-19-10-26/" target="_blank" rel="noopener">CIPER (Radar 19-oct) ↗</a>
+          <a class="chip" href="https://www.emol.com/noticias/Nacional/2026/10/20/1214664/kast-endurece-tono-oposicion-seguridad.html" target="_blank" rel="noopener">Emol (Kast) ↗</a>
+          <a class="chip" href="https://www.biobiochile.cl/noticias/nacional/chile/2026/10/20/kast-emplaza-a-diputados-que-rechazaron-ampliar-retencion-de-migrantes-que-se-hagan-cargo.shtml" target="_blank" rel="noopener">BioBioChile (retención) ↗</a>
+          <a class="chip" href="https://www.emol.com/noticias/Nacional/2026/10/20/1214623/monica-rincon-encerrona-robo-disparos.html" target="_blank" rel="noopener">Emol (Rincón) ↗</a>
+          <a class="chip" href="https://www.cnnchile.com/pais/detienen-a-59-personas-en-la-operacion-veta-roja-por-red-de-robo-de-cobre-en-ohiggins-un-excarabinero-seria-su-lider/" target="_blank" rel="noopener">CNN Chile (Veta Roja) ↗</a>
+          <a class="chip" href="https://www.elmostrador.cl/noticias/pais/2026/10/20/operacion-veta-roja-mas-de-40-detenidos-por-robo-de-cobre-en-ohiggins-y-allanamientos-en-codelco/" target="_blank" rel="noopener">El Mostrador (Veta Roja) ↗</a>
+          <a class="chip" href="https://www.emol.com/noticias/Nacional/2026/10/20/1214678/camara-aprueba-proyecto-carrera-carabineros.html" target="_blank" rel="noopener">Emol (Carabineros) ↗</a>
+          <a class="chip" href="https://www.cnnchile.com/pais/comision-de-seguridad-publica-del-senado-aprueba-proyecto-que-endurece-sanciones-por-atentados-contra-carabineros-pdi-y-gendarmeria/" target="_blank" rel="noopener">CNN Chile (Senado) ↗</a>
+        </div>
+      </article>
+
+      <article class="story">
+        <div class="kicker">Política — Araya, Arenas y el oficialismo</div>
+        <h3>Socialismo Democrático saca a Pedro Araya de la Comisión de Constitución, mientras Gonzalo Arenas llega a la Segegob en medio de las salidas en el gabinete regional</h3>
+        <ol>
+          <li><strong>El hecho compartido.</strong> BioBioChile, Emol y DF informan la remoción del senador Pedro Araya (PPD) de la Comisión de Constitución; Emol precisa que lo reemplazará Vlado Mirosevic (PL) y que se le sacó por su postura en la agenda de seguridad.</li>
+          <li><strong>Las posiciones.</strong> DF recoge a la diputada Castro (PS), que defiende la remoción; BioBioChile cita a Araya, que acusa al PS de «socialismo autoritario».</li>
+          <li><strong>El oficialismo.</strong> CNN Chile informa que Gonzalo Arenas asumirá como subsecretario de la Segegob; BioBioChile cita a Schalper (RN), que lo respalda pero advierte que el Gobierno debe comunicar mejor, y CNN Chile registra a Mansuy: si no está empoderado, «esto simplemente va a radicalizar los problemas de diseño del gobierno».</li>
+          <li><strong>El desgaste.</strong> Emol informa dos nuevas renuncias de seremis (suman 44); El Ciudadano contabiliza 45 seremis, tres ministras, seis subsecretarios y un delegado presidencial fuera en siete meses.</li>
+        </ol>
+        <div class="chips">
+          <a class="chip" href="https://www.biobiochile.cl/noticias/nacional/chile/2026/10/20/araya-acusa-al-ps-de-socialismo-autoritario-tras-ser-removido-de-la-comision-de-constitucion.shtml" target="_blank" rel="noopener">BioBioChile (Araya) ↗</a>
+          <a class="chip" href="https://www.emol.com/noticias/Nacional/2026/10/20/1214670/socialismo-democratico-pedro-araya-comision.html" target="_blank" rel="noopener">Emol (Constitución) ↗</a>
+          <a class="chip" href="https://www.df.cl/economia-y-politica/congreso/castro-ps-defiende-remocion-de-araya-ppd-de-comision-de-constitucion" target="_blank" rel="noopener">DF (Castro) ↗</a>
+          <a class="chip" href="https://www.cnnchile.com/lodijeronencnn/jorge-alessandri-confirma-que-el-exdiputado-udi-gonzalo-arenas-asumira-como-subsecretario-de-la-segegob/" target="_blank" rel="noopener">CNN Chile (Arenas) ↗</a>
+          <a class="chip" href="https://www.biobiochile.cl/noticias/nacional/chile/2026/10/20/schalper-rn-respalda-llegada-de-arenas-a-segegob-y-advierte-que-el-gobierno-debe-comunicar-mejor.shtml" target="_blank" rel="noopener">BioBioChile (Schalper) ↗</a>
+          <a class="chip" href="https://www.cnnchile.com/lodijeronencnn/daniel-mansuy-por-el-nombramiento-de-gonzalo-arenas-si-no-esta-empoderado-esto-simplemente-va-a-radicalizar-los-problemas-de-diseno-del-gobierno/" target="_blank" rel="noopener">CNN Chile (Mansuy) ↗</a>
+          <a class="chip" href="https://www.emol.com/noticias/Nacional/2026/10/20/1214654/renuncias-seremis-hacienda-economia.html" target="_blank" rel="noopener">Emol (seremis) ↗</a>
+          <a class="chip" href="https://www.elciudadano.com/politica/a-punta-de-ensayo-y-error-gobierno-de-kast-registra-45-seremis-entre-salidas-cambios-y-nombramientos-fallidos-en-siete-meses/10/20/" target="_blank" rel="noopener">El Ciudadano (45 seremis) ↗</a>
+        </div>
+      </article>
+
+    </section>
+
+    <aside class="sidebar">
+      <section class="briefs">
+        <h2 class="section-label">Innovación &amp; Startups</h2>
+        <ul>
+          <li class="brief">
+            <span class="outlet">Diario Financiero (DF Lab)</span>
+            <a class="headline" href="https://www.df.cl/plastic-frog-startup-que-acelera-y-financia-videojuegos-para-llevarlos-al" target="_blank" rel="noopener">Plastic Frog, la aceleradora chilena de videojuegos, alista nuevos lanzamientos</a>
+            <p>La aceleradora prepara el lanzamiento de nuevos juegos para 2026 y 2027.</p>
+          </li>
+          <li class="brief">
+            <span class="outlet">Diario Financiero (DF Lab)</span>
+            <a class="headline" href="https://www.df.cl/df-lab/innovacion-y-startups/club-reale-crea-linea-de-innovacion-aplicada-a-cocteleria-y-lanza-espuma-en" target="_blank" rel="noopener">Club Reale crea línea de innovación aplicada a coctelería</a>
+            <p>La empresa lanza una espuma en polvo vegana para bares.</p>
+          </li>
+          <li class="brief">
+            <span class="outlet">BioBioChile</span>
+            <a class="headline" href="https://www.biobiochile.cl/noticias/salud-y-bienestar/tratamientos/2026/10/20/una-selfie-bastaria-nueva-herramienta-de-ia-puede-predecir-supervivencia-al-cancer-segun-estudio.shtml" target="_blank" rel="noopener">Una selfie bastaría: nueva herramienta de IA puede predecir supervivencia al cáncer, según estudio</a>
+            <p>Una herramienta de inteligencia artificial estimaría la supervivencia a partir de una fotografía del rostro.</p>
+          </li>
+          <li class="brief">
+            <span class="outlet">Emol (Tendencias)</span>
+            <a class="headline" href="https://www.emol.com/noticias/Tendencias/2026/10/20/1214663/filosofa-muerte-teoria-cientifica-ia.html" target="_blank" rel="noopener">¿Morirá la teoría científica con la IA? Filósofa asegura que la automatización no eliminará el juicio humano</a>
+            <p>Una filósofa sostiene que la IA no reemplazará el juicio humano en la ciencia.</p>
+          </li>
+          <li class="brief">
+            <span class="outlet">El Mostrador (Ciencia)</span>
+            <a class="headline" href="https://www.elmostrador.cl/cultura/ciencia-cultura/2026/10/20/estudio-liderado-por-investigadores-de-cata-resuelve-misterio-de-30-anos-de-galaxia-enana/" target="_blank" rel="noopener">Estudio liderado por investigadores de CATA resuelve misterio de 30 años de galaxia enana</a>
+            <p>Un estudio identifica tres procesos que explican los cambios en la galaxia enana NGC 1427A.</p>
+          </li>
+        </ul>
+      </section>
+
+      <section class="briefs">
+        <h2 class="section-label">Investigación &amp; Transparencia</h2>
+        <ul>
+          <li class="brief">
+            <span class="outlet">Reportea (19 oct)</span>
+            <a class="headline" href="https://reportea.cl/2026/10/19/jose-ramon-correa-aldo-cornejo-y-otros-los-desconocidos-asesores-en-las-sombras-de-minera-dominga/" target="_blank" rel="noopener">José Ramón Correa, Aldo Cornejo y otros: los desconocidos asesores en las sombras de Minera Dominga</a>
+            <p>Según documentos internos de Andes Iron, la lista de asesores proyectados para 2022 incluye al menos cinco exparlamentarios.</p>
+          </li>
+          <li class="brief">
+            <span class="outlet">Reportea (19 oct)</span>
+            <a class="headline" href="https://reportea.cl/2026/10/19/investigacion-por-incendio-en-la-uss-durante-el-estallido-se-freno-cuando-apuntaba-a-dos-carabineros-infiltrados/" target="_blank" rel="noopener">Investigación por incendio en la USS durante el estallido se frenó cuando apuntaba a dos carabineros infiltrados</a>
+            <p>La causa ubicó a dos carabineros de civil dentro del edificio y se detuvo en ese punto.</p>
+          </li>
+          <li class="brief">
+            <span class="outlet">CIPER (Radar)</span>
+            <a class="headline" href="https://www.ciperchile.cl/2026/10/19/radar-19-10-26/" target="_blank" rel="noopener">Radar del 19 de octubre: expulsiones, rentas vitalicias y arraigo a un alcalde</a>
+            <p>Incluye un fallo a favor de aseguradoras y una medida contra el alcalde de Chillán por presunto fraude.</p>
+          </li>
+          <li class="brief">
+            <span class="outlet">BioBioChile</span>
+            <a class="headline" href="https://www.biobiochile.cl/noticias/nacional/region-del-bio-bio/2026/10/20/cgr-detecta-irregularidades-en-viajes-del-gore-bio-bio-entre-2022-2024-reparos-superan-100-millones.shtml" target="_blank" rel="noopener">CGR detecta irregularidades en viajes del GORE Bío Bío entre 2022-2024: reparos superan $100 millones</a>
+            <p>Una auditoría de la Contraloría observa gastos de viajes del gobierno regional.</p>
+          </li>
+          <li class="brief">
+            <span class="outlet">El Ciudadano</span>
+            <a class="headline" href="https://www.elciudadano.com/chile/chile-profundiza-la-cooperacion-militar-con-inglaterra/10/20/" target="_blank" rel="noopener">Chile profundiza la cooperación militar con Inglaterra</a>
+            <p>Reportaje sobre el fortalecimiento de la cooperación militar entre Chile y el Reino Unido.</p>
+          </li>
+        </ul>
+      </section>
+
+      <section class="briefs">
+        <h2 class="section-label">Pensamiento &amp; Opinión</h2>
+        <ul>
+          <li class="brief">
+            <span class="outlet">Radio U. de Chile (Opinión)</span>
+            <a class="headline" href="https://radio.uchile.cl/2026/10/20/grave-intento-de-desmantelar-el-indh/" target="_blank" rel="noopener">Grave intento de desmantelar el INDH</a>
+            <p>Columna del director, Patricio López, sobre la reforma al instituto.</p>
+          </li>
+          <li class="brief">
+            <span class="outlet">El Mostrador (Opinión)</span>
+            <a class="headline" href="https://www.elmostrador.cl/noticias/opinion/columnas/2026/10/20/un-gobierno-de-juguete/" target="_blank" rel="noopener">¿Un Gobierno de juguete?</a>
+            <p>Columna de Agustín Squella que cuestiona la seriedad del Gobierno.</p>
+          </li>
+          <li class="brief">
+            <span class="outlet">Emol / El Mercurio (Opinión)</span>
+            <a class="headline" href="https://www.elmercurio.com/blogs/2026/10/20/136084/octubrismo-frances-.aspx" target="_blank" rel="noopener">Octubrismo francés</a>
+            <p>Columna de Eugenio Tironi sobre las protestas en Francia.</p>
+          </li>
+          <li class="brief">
+            <span class="outlet">BioBioChile (Opinión)</span>
+            <a class="headline" href="https://www.biobiochile.cl/noticias/opinion/columnas-bbcl/2026/10/20/una-frontera-no-se-cierra-se-gobierna.shtml" target="_blank" rel="noopener">Una frontera no se cierra: se gobierna</a>
+            <p>Juan Castro Bekios, fiscal regional de Antofagasta, argumenta que el control fronterizo es un asunto de gobernanza.</p>
+          </li>
+          <li class="brief">
+            <span class="outlet">El Desconcierto (Opinión)</span>
+            <a class="headline" href="https://eldesconcierto.cl/opinion/no-basta-saber-que-vienen-las-lluvias-n5463266" target="_blank" rel="noopener">No basta con saber que vienen las lluvias</a>
+            <p>Columna de Gabriel Iturra sobre qué debe hacerse con el aviso anticipado de lluvias.</p>
+          </li>
+        </ul>
+      </section>
+
+    </aside>
+  </div>
+
+  <section class="pulse-section">
+    <h2 class="section-label">Pulso social — cómo reacciona la conversación pública</h2>
+    <p class="pulse-intro">La última encuesta Cadem (publicada el 19 de octubre) mantiene la aprobación de Kast en 30% y la desaprobación en 65%, y Criteria (Emol, 11 de octubre) la ubicó en 27%. Con la alerta roja por lluvias y el Fondo E en la agenda, el pesimismo económico domina los datos disponibles.</p>
+
+    <div class="sentiment-strip">
+      <div class="sentiment-bar" role="img" aria-label="Aprobación presidencial Cadem: 30% aprueba, 5% sin opinión, 65% desaprueba">
+        <span class="seg-fav" style="width:30%"></span>
+        <span class="seg-neu" style="width:5%"></span>
+        <span class="seg-neg" style="width:65%"></span>
+      </div>
+      <div class="sentiment-legend">
+        <span><span class="dot fav"></span>Aprueba (Cadem) — 30%</span>
+        <span><span class="dot neu"></span>Sin opinión — 5%</span>
+        <span><span class="dot neg"></span>Desaprueba — 65%</span>
+      </div>
+    </div>
+
+    <div class="pulse-grid">
+      <div class="pulse-card">
+        <span class="outlet">El Dínamo (Cadem)</span>
+        <h4><a href="https://www.eldinamo.cl/politica/2026/10/19/encuesta-cadem-aprobacion-de-kast-cae-al-30-y-un-60-apoya-eliminar-el-indulto-presidencial/" target="_blank" rel="noopener">Cadem: 87% cree que la economía está estancada o en retroceso</a></h4>
+        <p>93% evalúa la situación laboral como mala o muy mala; 69% piensa que Chile va por mal camino y 68% se declara pesimista sobre el futuro.</p>
+      </div>
+      <div class="pulse-card">
+        <span class="outlet">El Dínamo (Cadem) · Indultos</span>
+        <h4><a href="https://www.eldinamo.cl/politica/2026/10/19/encuesta-cadem-aprobacion-de-kast-cae-al-30-y-un-60-apoya-eliminar-el-indulto-presidencial/" target="_blank" rel="noopener">60% apoya eliminar el indulto presidencial; 33% prefiere mantenerlo</a></h4>
+        <p>55% rechaza indultar a exuniformados condenados por hechos del estallido social, y 64% lo rechaza en el caso de mayores de 80 años, enfermos y condenados por violaciones a los DDHH.</p>
+      </div>
+      <div class="pulse-card">
+        <span class="outlet">Emol (Criteria)</span>
+        <h4><a href="https://www.emol.com/noticias/Nacional/2026/10/11/1213867/encuesta-criteria-aprobacion-presidencial.html" target="_blank" rel="noopener">Criteria: aprobación de Kast en 27% y desaprobación en 64%, su nivel más alto</a></h4>
+        <p>82% considera que el Gobierno está por debajo de lo que esperaba; 58% juzga ineficiente el gasto público y 52% apoya reducir funcionarios públicos.</p>
+      </div>
+      <div class="pulse-card">
+        <span class="outlet">La Tercera (Cadem para AFP Capital)</span>
+        <h4><a href="https://www.latercera.com/pulso/noticia/fondos-generacionales-de-afp-siete-de-cada-10-chilenos-dicen-estar-poco-o-nada-informados-a-seis-meses-de-su-estreno/" target="_blank" rel="noopener">Fondos generacionales de AFP: siete de cada 10 se dicen poco o nada informados</a></h4>
+        <p>Encuesta online del 21 de septiembre (700 casos, ±3,4 pts): 53% se opone a asignar el fondo por fecha de nacimiento sin posibilidad de cambio. Es anterior a la caída del Fondo E.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="thought-section" id="pensamiento">
+    <h2 class="section-label">Pensamiento y humanidades — ideas de Ethic</h2>
+    <p class="thought-intro">Una pausa del ruido de la coyuntura: cuatro lecturas de Ethic, la revista española de pensamiento, sobre el mito, el carisma convertido en recurso, las ideologías y la moral como «barniz». No son prensa chilena; son ideas para leer con calma.</p>
+
+    <div class="thought-grid">
+      <div class="thought-card">
+        <span class="kicker">Opinión · Diego S. Garrocho · 20 oct 2026</span>
+        <h4><a href="https://ethic.es/vigencia-mito" target="_blank" rel="noopener">La vigencia del mito</a></h4>
+        <p>Para Garrocho, el mito es una «mentira» que la verdad necesita para ser comprendida: contamos historias porque no tenemos la verdad y necesitamos un lugar donde esperarla.</p>
+        <blockquote>«Quizá no exista mentira más honesta que el mito»</blockquote>
+      </div>
+      <div class="thought-card">
+        <span class="kicker">Opinión · Jorge Freire · 9 oct 2026</span>
+        <h4><a href="https://ethic.es/no-me-farmees-aura" target="_blank" rel="noopener">No me farmees el aura</a></h4>
+        <p>Freire sostiene que las «batallas de aura» no son nuevas en su frivolidad; lo nuevo es que el carisma, que no encaja en una lógica de acumulación, pasa a ser un recurso que hay que acumular, y la persona acaba trabajando para otros a costa de sí misma.</p>
+        <blockquote>«la subversión de la naturaleza del carisma»</blockquote>
+      </div>
+      <div class="thought-card">
+        <span class="kicker">Pensamiento · Luis Ballesteros Andreu · 7 oct 2026</span>
+        <h4><a href="https://ethic.es/banalidad-pensamiento-critico" target="_blank" rel="noopener">La banalidad del pensamiento crítico</a></h4>
+        <p>Ballesteros Andreu plantea que las ideologías, como sistemas cerrados, anulan el pensamiento crítico: la disciplina de partido y la simplificación política llevan a la ciudadanía a renunciar a su propio juicio, lo que explicaría el voto cautivo o la abstención.</p>
+        <blockquote>«las ideologías se imponen ante la renuncia del pensamiento»</blockquote>
+      </div>
+      <div class="thought-card">
+        <span class="kicker">Pensamiento · Alejandro Villamor · 18 sep 2026 (hace más de un mes)</span>
+        <h4><a href="https://ethic.es/teoria-barniz-moralidad" target="_blank" rel="noopener">La teoría del barniz</a></h4>
+        <p>Villamor cuestiona la idea de que la moralidad sea una capa superficial sobre un fondo primitivo y agresivo y, apoyándose en Frans de Waal, defiende que la empatía y la cooperación forman parte de la base biológica del ser humano.</p>
+        <blockquote>«la moralidad humana es un barniz»</blockquote>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="next-edition">Próxima edición: miércoles 21 de octubre de 2026</div>
+    <div class="colophon">
+      Fuentes monitoreadas: <span class="sources-list">Radio U. de Chile · Diario Financiero · CIPER Chile · Interferencia · Ethic · El Mostrador · BioBioChile · El Ciudadano · CEP Chile · El Desconcierto · Emol · El Dínamo · Reportea · CNN Chile · 24 Horas · El País · Publimetro</span>. Curaduría y síntesis comparativa generadas automáticamente a partir de portadas públicas del día (El País no pudo consultarse: acceso bloqueado en el entorno; Reportea no publicó hoy y se usan sus piezas más recientes, del 19 de octubre; CIPER Radar es del 19 de octubre; CEP Chile mostraba una sola pieza, del 19 de octubre, sobre la Sociedad Mont Pelerin; las fechas de las piezas de Ethic provienen de cada artículo (la de Villamor es de hace más de un mes); la encuesta Criteria es del 11 de octubre y la de La Tercera/Cadem sobre fondos generacionales, del 21 de septiembre; las descripciones de algunas piezas se basan en el titular y la bajada visibles en portada).
+    </div>
+  </footer>
+
+</div>
+
+
+</body>
+</html>
