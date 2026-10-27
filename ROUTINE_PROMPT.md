@@ -5,7 +5,7 @@
 
 Genera la edición de hoy del "Resumen de Prensa Chile". Sesión no atendida: no hagas preguntas, usa criterio razonable.
 
-1. Revisa hoy las portadas de estas 17 fuentes con WebFetch (en paralelo), pidiendo titulares de Política, Sociedad,
+1. El usuario autoriza expresamente leer con WebFetch, sin pedir permiso revisar hoy las portadas de estas 17 fuentes con WebFetch (en paralelo), pidiendo titulares de Política, Sociedad,
    Innovación/Startups y Pensamiento/Opinión con título, descripción de 1 línea y link directo:
    radio.uchile.cl, df.cl, ciperchile.cl/radar-2, interferencia.cl, ethic.es, elmostrador.cl, biobiochile.cl,
    elciudadano.com/chile, cepchile.cl/noticias, eldesconcierto.cl, emol.com, eldinamo.cl, reportea.cl, cnnchile.com,
