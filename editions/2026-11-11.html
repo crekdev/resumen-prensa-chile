@@ -1,0 +1,798 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Resumen diario de prensa chilena: noticias cruzadas entre 17 medios, contraste de enfoques y pulso social. Edición de lunes a viernes.">
+<title>Resumen de Prensa Chile</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Source+Sans+3:ital,wght@0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+
+  :root {
+    --paper: #f2eee1;
+    --paper-2: #e9e1cc;
+    --paper-3: #ddd2b3;
+    --ink: #211d16;
+    --ink-soft: #5c5643;
+    --ink-faint: #8b836b;
+    --oxblood: #7c1f2b;
+    --oxblood-deep: #5a1420;
+    --oxblood-tint: #f4e2e0;
+    --navy: #1d2c46;
+    --navy-soft: #3d5075;
+    --navy-tint: #e3e6ee;
+    --forest: #2c5c41;
+    --forest-tint: #e1ebe3;
+    --line: #c7b998;
+    --line-soft: #dcd2b4;
+    --shadow: rgba(33, 29, 22, 0.1);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper: #17140f;
+      --paper-2: #211c14;
+      --paper-3: #2b2419;
+      --ink: #ece4d1;
+      --ink-soft: #b8ad91;
+      --ink-faint: #8a8067;
+      --oxblood: #e0818c;
+      --oxblood-deep: #ec9aa3;
+      --oxblood-tint: #3a2024;
+      --navy: #90aede;
+      --navy-soft: #6f8dc0;
+      --navy-tint: #1e2636;
+      --forest: #7fb494;
+      --forest-tint: #1c2b21;
+      --line: #4a4230;
+      --line-soft: #332c1f;
+      --shadow: rgba(0, 0, 0, 0.4);
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --paper: #17140f;
+    --paper-2: #211c14;
+    --paper-3: #2b2419;
+    --ink: #ece4d1;
+    --ink-soft: #b8ad91;
+    --ink-faint: #8a8067;
+    --oxblood: #e0818c;
+    --oxblood-deep: #ec9aa3;
+    --oxblood-tint: #3a2024;
+    --navy: #90aede;
+    --navy-soft: #6f8dc0;
+    --navy-tint: #1e2636;
+    --forest: #7fb494;
+    --forest-tint: #1c2b21;
+    --line: #4a4230;
+    --line-soft: #332c1f;
+    --shadow: rgba(0, 0, 0, 0.4);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--paper-3);
+    color: var(--ink);
+    font-family: 'Source Sans 3', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .page {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 2.5rem 1.75rem 3.5rem;
+    background: var(--paper);
+  }
+
+  a { color: var(--navy); text-decoration-color: var(--line); text-underline-offset: 2px; }
+  a:hover { color: var(--oxblood); text-decoration-color: var(--oxblood); }
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--oxblood); outline-offset: 2px; }
+
+  /* ---------- Masthead ---------- */
+  .ear {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: 0.9rem;
+  }
+
+  .masthead { text-align: center; }
+
+  .masthead .kicker {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--oxblood);
+    margin-bottom: 0.6rem;
+  }
+
+  .title {
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 700;
+    font-optical-sizing: auto;
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    letter-spacing: -0.01em;
+    line-height: 0.95;
+    margin: 0 0 0.85rem;
+    color: var(--ink);
+    text-wrap: balance;
+  }
+
+  .dateline {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.55rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.78rem;
+    color: var(--ink-soft);
+  }
+
+  .dateline .edition { color: var(--oxblood); font-weight: 600; }
+  .dateline .divider { color: var(--line); }
+
+  .rule-thick {
+    height: 4px;
+    background: var(--ink);
+    margin: 1.4rem 0 0.35rem;
+  }
+  .rule-thin {
+    height: 1px;
+    background: var(--line);
+    margin: 0.35rem 0 0;
+  }
+  .rule-hair {
+    height: 1px;
+    background: var(--line-soft);
+  }
+
+  /* ---------- Lead ---------- */
+  .lead {
+    padding: 1.6rem 0 1.2rem;
+    max-width: 880px;
+    margin: 0 auto;
+  }
+  .lead p {
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 500;
+    font-size: clamp(1.15rem, 1.9vw, 1.5rem);
+    line-height: 1.5;
+    color: var(--ink);
+    margin: 0;
+    text-wrap: pretty;
+  }
+  .dropcap {
+    float: left;
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 700;
+    font-size: 3.6rem;
+    line-height: 0.8;
+    padding: 0.1rem 0.35rem 0 0;
+    color: var(--oxblood);
+  }
+
+  /* ---------- Layout ---------- */
+  .grid {
+    display: grid;
+    grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+    gap: 0 2.75rem;
+    margin-top: 1.8rem;
+    align-items: start;
+  }
+  @media (max-width: 860px) {
+    .grid { grid-template-columns: 1fr; gap: 2.25rem 0; }
+  }
+
+  .section-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--oxblood);
+    margin: 0 0 1rem;
+    padding-bottom: 0.55rem;
+    border-bottom: 2px solid var(--ink);
+  }
+
+  /* ---------- Story cards ---------- */
+  .stories { min-width: 0; }
+  .story + .story { margin-top: 1.9rem; padding-top: 1.9rem; border-top: 1px solid var(--line); }
+
+  .story .kicker {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--navy-soft);
+    margin-bottom: 0.5rem;
+  }
+
+  .story h3 {
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 600;
+    font-size: clamp(1.2rem, 2vw, 1.55rem);
+    line-height: 1.25;
+    margin: 0 0 0.85rem;
+    color: var(--ink);
+    text-wrap: balance;
+  }
+
+  .story ol {
+    margin: 0 0 1rem;
+    padding-left: 1.2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+  }
+  .story li {
+    font-size: 0.98rem;
+    line-height: 1.58;
+    color: var(--ink-soft);
+    padding-left: 0.15rem;
+  }
+  .story li::marker {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.85rem;
+    color: var(--oxblood);
+    font-weight: 600;
+  }
+  .story li a { color: var(--navy); font-weight: 600; }
+  .story li strong { color: var(--ink); }
+
+  .chips { display: flex; flex-wrap: wrap; gap: 0.45rem; }
+  .chip {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.03em;
+    color: var(--navy);
+    background: var(--navy-tint);
+    border: 1px solid var(--line);
+    padding: 0.28rem 0.6rem;
+    border-radius: 3px;
+    text-decoration: none;
+  }
+  .chip:hover { background: var(--oxblood-tint); border-color: var(--oxblood); color: var(--oxblood-deep); }
+
+  /* ---------- Sidebar briefs ---------- */
+  .sidebar { display: flex; flex-direction: column; gap: 2.2rem; }
+  .briefs ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
+  .brief { padding: 0.95rem 0; border-bottom: 1px solid var(--line-soft); }
+  .brief:first-child { padding-top: 0; }
+  .brief:last-child { border-bottom: none; }
+
+  .brief .outlet {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.66rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--oxblood);
+    display: block;
+    margin-bottom: 0.3rem;
+  }
+  .brief a.headline {
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 600;
+    font-size: 1.02rem;
+    line-height: 1.32;
+    color: var(--ink);
+    text-decoration: none;
+    display: block;
+    margin-bottom: 0.35rem;
+    text-wrap: balance;
+  }
+  .brief a.headline:hover { color: var(--oxblood); }
+  .brief p {
+    font-size: 0.88rem;
+    line-height: 1.5;
+    color: var(--ink-soft);
+    margin: 0;
+  }
+
+  /* ---------- Pulso Social ---------- */
+  .pulse-section {
+    margin-top: 2.4rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--line);
+  }
+  .pulse-intro {
+    max-width: 780px;
+    font-size: 0.98rem;
+    line-height: 1.55;
+    color: var(--ink-soft);
+    margin: 0 0 1.5rem;
+  }
+
+  .sentiment-strip {
+    display: flex;
+    align-items: center;
+    gap: 1.1rem;
+    margin-bottom: 1.9rem;
+    flex-wrap: wrap;
+  }
+  .sentiment-bar {
+    flex: 1 1 260px;
+    max-width: 420px;
+    height: 10px;
+    border-radius: 5px;
+    overflow: hidden;
+    display: flex;
+    border: 1px solid var(--line);
+  }
+  .sentiment-bar span { display: block; height: 100%; }
+  .seg-neg { background: var(--oxblood); }
+  .seg-neu { background: var(--line-soft); }
+  .seg-fav { background: var(--forest); }
+  .sentiment-legend {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--ink-soft);
+  }
+  .sentiment-legend .dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 0.35rem; }
+  .sentiment-legend .dot.neg { background: var(--oxblood); }
+  .sentiment-legend .dot.neu { background: var(--line-soft); border: 1px solid var(--line); }
+  .sentiment-legend .dot.fav { background: var(--forest); }
+
+  .pulse-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.6rem 2.2rem;
+  }
+  @media (max-width: 700px) {
+    .pulse-grid { grid-template-columns: 1fr; }
+  }
+  .pulse-card { min-width: 0; }
+  .pulse-card .outlet {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.66rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--forest);
+    display: block;
+    margin-bottom: 0.35rem;
+  }
+  .pulse-card h4 {
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 600;
+    font-size: 1.08rem;
+    line-height: 1.3;
+    margin: 0 0 0.5rem;
+    color: var(--ink);
+  }
+  .pulse-card h4 a { color: inherit; text-decoration: none; }
+  .pulse-card h4 a:hover { color: var(--oxblood); }
+  .pulse-card p {
+    font-size: 0.92rem;
+    line-height: 1.55;
+    color: var(--ink-soft);
+    margin: 0;
+  }
+  .pulse-card blockquote {
+    margin: 0.55rem 0 0;
+    padding-left: 0.7rem;
+    border-left: 2px solid var(--line);
+    font-style: italic;
+    font-size: 0.88rem;
+    color: var(--ink-faint);
+  }
+
+  /* ---------- Pensamiento y humanidades (Ethic) ---------- */
+  .thought-section {
+    margin-top: 2.4rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--line);
+  }
+  .thought-intro {
+    max-width: 780px;
+    font-size: 0.98rem;
+    line-height: 1.55;
+    color: var(--ink-soft);
+    margin: 0 0 1.5rem;
+  }
+  .thought-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.8rem 2.2rem;
+  }
+  @media (max-width: 700px) {
+    .thought-grid { grid-template-columns: 1fr; }
+  }
+  .thought-card { min-width: 0; }
+  .thought-card .kicker {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.66rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--navy-soft);
+    display: block;
+    margin-bottom: 0.35rem;
+  }
+  .thought-card h4 {
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 600;
+    font-size: 1.12rem;
+    line-height: 1.3;
+    margin: 0 0 0.5rem;
+    color: var(--ink);
+    text-wrap: balance;
+  }
+  .thought-card h4 a { color: inherit; text-decoration: none; }
+  .thought-card h4 a:hover { color: var(--oxblood); }
+  .thought-card p {
+    font-size: 0.92rem;
+    line-height: 1.55;
+    color: var(--ink-soft);
+    margin: 0;
+  }
+  .thought-card blockquote {
+    margin: 0.6rem 0 0;
+    padding-left: 0.7rem;
+    border-left: 2px solid var(--oxblood);
+    font-family: 'Fraunces', Georgia, serif;
+    font-style: italic;
+    font-size: 0.95rem;
+    line-height: 1.45;
+    color: var(--ink);
+  }
+
+  /* ---------- Footer ---------- */
+  .footer {
+    margin-top: 2.75rem;
+    padding-top: 1.4rem;
+    border-top: 4px solid var(--ink);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 1rem 2rem;
+  }
+  .next-edition {
+    font-family: 'Fraunces', Georgia, serif;
+    font-style: italic;
+    font-weight: 500;
+    font-size: 1.05rem;
+    color: var(--oxblood-deep);
+  }
+  .colophon {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    line-height: 1.65;
+    color: var(--ink-faint);
+    max-width: 640px;
+  }
+  .colophon .sources-list { color: var(--ink-soft); }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .chip, .brief a.headline, a { transition: color 0.15s ease, background 0.15s ease, border-color 0.15s ease; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="ear">
+    <span>Edición chilena · circulación digital</span>
+    <span>Publicación de lunes a viernes</span>
+  </div>
+
+  <header class="masthead">
+    <div class="kicker">Prensa nacional en contraste</div>
+    <h1 class="title">Resumen de Prensa Chile</h1>
+    <div class="dateline">
+      <span class="edition">Edición N.º 42</span>
+      <span class="divider">·</span>
+      <span class="date">Miércoles 11 de noviembre de 2026</span>
+      <span class="divider">·</span>
+      <span>17 medios monitoreados</span>
+    </div>
+  </header>
+
+  <div class="rule-thick"></div>
+  <div class="rule-thin"></div>
+
+  <section class="lead">
+    <p><span class="dropcap">E</span>l paro de camioneros entra en su segundo día con versiones enfrentadas —un acuerdo que despejó la Ruta 68, según Publimetro; una negociación estancada, según El Desconcierto— mientras el Gobierno alterna diálogo y advertencias. El caso Rabat sigue abierto: los decretos se entregarían hoy, la Fiscalía fijó siete días de plazo y el oficialismo cierra filas pese a la acusación constitucional en preparación. La Cámara rechazó las partidas de Interior y Educación del Presupuesto 2027, y Criteria ubica la aprobación de Kast en 24%, su peor cifra.</p>
+  </section>
+
+  <div class="grid">
+    <section class="stories">
+      <h2 class="section-label">Noticias cruzadas</h2>
+
+      <article class="story">
+        <div class="kicker">Transporte y combustibles — paro de camioneros</div>
+        <h3>El paro camionero entra en su segundo día entre versiones opuestas: Publimetro habla de un acuerdo que despejó la Ruta 68; El Desconcierto, de una negociación sin salida</h3>
+        <ol>
+          <li><strong>El hecho compartido.</strong> CNN Chile informa que el paro de camioneros y buses cumple su segundo día con congestión y cortes parciales en rutas de Santiago, y que taxistas del aeropuerto se suman por el alza de combustibles; El Ciudadano cifra en más de 4.000 los camiones detenidos.</li>
+          <li><strong>Acuerdo o estancamiento.</strong> Publimetro consigna que un acuerdo entre camioneros y Gobierno permitió despejar la Ruta 68 y recoge el llamado de Kast («pensemos en Chile»); El Desconcierto titula que los transportistas «no descartan que se vuelvan más radicales» porque no hay acuerdo, y El Ciudadano que ni Kast ni las cúpulas frenaron el paro y que los pequeños camioneros rechazan el tope de precios.</li>
+          <li><strong>Mano dura y críticas.</strong> Emol informa que Kast llamó a despejar el tránsito y El Dínamo, que La Moneda advierte que «nadie tiene el derecho de cortar las vías»; CNN Chile recoge que el delegado de La Araucanía no descarta la Ley de Seguridad del Estado, mientras Paulina Núñez (RN) pide al Gobierno ir más allá de «pedirles un esfuerzo» y El Mostrador cita a Freddy Martínez: «el problema es real».</li>
+          <li><strong>Qué hacer con los precios.</strong> DF reúne propuestas transversales, desde eliminar el impuesto específico hasta traspasar utilidades de ENAP al Mepco; Interferencia ubica el sexto aumento consecutivo dentro de «su peor crisis» para el Gobierno, y El Desconcierto anuncia un alza de $40 este jueves.</li>
+        </ol>
+        <div class="chips">
+          <a class="chip" href="https://www.publimetro.cl/noticias/2026/11/10/presidente-kast-abordo-el-paro-de-camioneros-y-respaldo-ley-para-topar-combustibles-el-llamado-es-a-que-pensemos-en-chile/" target="_blank" rel="noopener">Publimetro (acuerdo) ↗</a>
+          <a class="chip" href="https://www.cnnchile.com/pais/paro-de-camioneros-y-buses-cumple-segundo-dia-reportan-congestion-y-cortes-parciales-en-rutas-de-santiago/" target="_blank" rel="noopener">CNN Chile (segundo día) ↗</a>
+          <a class="chip" href="https://www.cnnchile.com/pais/taxistas-aeropuerto-suman-paro-camioneros-alza-combustibles-ruta-68/" target="_blank" rel="noopener">CNN Chile (taxistas) ↗</a>
+          <a class="chip" href="https://www.cnnchile.com/lodijeronencnn/delegado-araucania-ley-seguridad-estado-camioneros-bloqueo-rutas/" target="_blank" rel="noopener">CNN Chile (Seguridad del Estado) ↗</a>
+          <a class="chip" href="https://www.cnnchile.com/pais/paulina-nunez-rn-emplazo-al-gobierno-por-paro-de-camioneros-no-basta-con-pedirles-que-hagan-un-esfuerzo/" target="_blank" rel="noopener">CNN Chile (Núñez) ↗</a>
+          <a class="chip" href="https://eldesconcierto.cl/actualidad/no-descartamos-que-se-vuelvan-mas-radicales-paro-camioneros-continua-no-llegar-acuerdo-gobierno-n5463931" target="_blank" rel="noopener">El Desconcierto (radicalizar) ↗</a>
+          <a class="chip" href="https://eldesconcierto.cl/actualidad/alza-40-combustibles-este-jueves-donde-cargar-gasolina-y-diesel-mas-barato-santiago-y-regiones-n5463914" target="_blank" rel="noopener">El Desconcierto (alza $40) ↗</a>
+          <a class="chip" href="https://www.elciudadano.com/actualidad/ni-kast-ni-las-cupulas-frenaron-el-paro-pequenos-camioneros-salen-a-las-rutas-y-cifran-en-mas-de-4-000-las-maquinas-paralizadas/11/10/" target="_blank" rel="noopener">El Ciudadano (4.000 camiones) ↗</a>
+          <a class="chip" href="https://www.emol.com/noticias/Nacional/2026/11/11/1216749/kast-transportistas-libre-transito-inversion.html" target="_blank" rel="noopener">Emol (Kast) ↗</a>
+          <a class="chip" href="https://www.eldinamo.cl/politica/2026/11/10/borrador-automaticola-moneda-advierte-a-camioneros-por-paro-nadie-tiene-el-derecho-de-irrumpir-o-cortar-las-vias/" target="_blank" rel="noopener">El Dínamo (La Moneda) ↗</a>
+          <a class="chip" href="https://www.elmostrador.cl/noticias/pais/2026/11/10/freddy-martinez-emplaza-al-gobierno-por-paro-camionero-el-problema-es-real/" target="_blank" rel="noopener">El Mostrador (Martínez) ↗</a>
+          <a class="chip" href="https://www.df.cl/economia-y-politica/congreso/propuestas-transversales-por-combustibles-desde-eliminar-el-impuesto" target="_blank" rel="noopener">DF (propuestas) ↗</a>
+          <a class="chip" href="https://interferencia.cl/articulos/bencinazo-decretos-y-paro-el-gobierno-de-kast-llega-al-sexto-aumento-de-combustibles-sin" target="_blank" rel="noopener">Interferencia (sexto aumento) ↗</a>
+        </div>
+      </article>
+
+      <article class="story">
+        <div class="kicker">Gobierno — caso Rabat</div>
+        <h3>Rabat entrega los decretos con plazo de siete días de la Fiscalía, mientras el oficialismo lo respalda y la oposición prepara la acusación constitucional</h3>
+        <ol>
+          <li><strong>El hecho compartido.</strong> 24 Horas y CNN Chile informan que el ministro Arenas anticipa la entrega de los decretos este miércoles; 24 Horas agrega que la Fiscalía fijó siete días al Gobierno, y Emol, que Rabat detalla la entrega al Senado y descarta criterios políticos.</li>
+          <li><strong>Respaldo versus acusación.</strong> BioBioChile informa que el cónclave oficialista dio un apoyo «indiscutible» a Rabat, y 24 Horas que él respalda la decisión de Kast de mantenerlo; El Mostrador, en cambio, titula que la oposición busca «sacar al pizarrón» a quienes apoyan las rebajas, y consigna que una sobrina de Matthei prepara la acusación.</li>
+          <li><strong>Transparencia en duda.</strong> CNN Chile recoge a Mirosevic, que acusa una «decisión política» para dilatar la entrega; Interferencia informa que Rabat aprobó rebajas que sus propias oficinas regionales habían objetado, dos de ellas bajo alerta de la ley contra agresores sexuales.</li>
+          <li><strong>Frentes judiciales y legislativos.</strong> El Ciudadano da cuenta de una querella que pide revisar los celulares de Rabat y Silva por rebajas a condenados de Punta Peuco; Reportea, que el ministro habría omitido ante el Congreso fallos de la Suprema contra beneficios a pederastas; BioBioChile, que senadores UDI impulsan el fin de las rebajas por buena conducta.</li>
+        </ol>
+        <div class="chips">
+          <a class="chip" href="https://www.24horas.cl/actualidad/politica/arenas-decretos-caso-rabat-seran-entregados-este-miercoles" target="_blank" rel="noopener">24 Horas (decretos) ↗</a>
+          <a class="chip" href="https://www.24horas.cl/actualidad/politica/fiscalia-fija-siete-dias-de-plazo-al-gobierno-decretos-rebaja-condenas" target="_blank" rel="noopener">24 Horas (Fiscalía) ↗</a>
+          <a class="chip" href="https://www.24horas.cl/actualidad/politica/rabat-kast-cargo-ministro-decretos" target="_blank" rel="noopener">24 Horas (Rabat y Kast) ↗</a>
+          <a class="chip" href="https://www.cnnchile.com/pais/arenas-asegura-que-respaldo-oficialista-a-rabat-es-indiscutible-y-estima-que-decretos-serian-entregados-este-miercoles/" target="_blank" rel="noopener">CNN Chile (Arenas) ↗</a>
+          <a class="chip" href="https://www.cnnchile.com/pais/mirosevic-decision-politica-justicia-dilatar-decretos-rabat/" target="_blank" rel="noopener">CNN Chile (Mirosevic) ↗</a>
+          <a class="chip" href="https://www.emol.com/noticias/Nacional/2026/11/11/1216781/rabat-entrega-decretos-criterios.html" target="_blank" rel="noopener">Emol (Rabat) ↗</a>
+          <a class="chip" href="https://www.biobiochile.cl/noticias/nacional/chile/2026/11/10/conclave-oficialista-apoyo-indiscutible-a-rabat-dialogo-con-camioneros-y-proyecto-mas-alla-de-2030.shtml" target="_blank" rel="noopener">BioBioChile (cónclave) ↗</a>
+          <a class="chip" href="https://www.biobiochile.cl/noticias/nacional/chile/2026/11/10/se-acabaron-los-descuentos-senadores-udi-impulsan-fin-de-rebajas-de-condenas-por-buena-conducta.shtml" target="_blank" rel="noopener">BioBioChile (UDI) ↗</a>
+          <a class="chip" href="https://www.elmostrador.cl/noticias/pais/2026/11/11/ac-contra-rabat-oposicion-busca-sacar-al-pizarron-a-quienes-apoyan-las-rebajas-a-pedofilos/" target="_blank" rel="noopener">El Mostrador (AC) ↗</a>
+          <a class="chip" href="https://www.elmostrador.cl/noticias/pais/2026/11/10/la-sobrina-de-matthei-que-trabajo-para-boric-y-ahora-prepara-acusacion-contra-rabat/" target="_blank" rel="noopener">El Mostrador (Matthei) ↗</a>
+          <a class="chip" href="https://interferencia.cl/articulos/rabat-aprobo-rebajas-de-condena-que-sus-oficinas-regionales-habian-objetado-dos-de-ellas" target="_blank" rel="noopener">Interferencia (oficinas regionales) ↗</a>
+          <a class="chip" href="https://www.elciudadano.com/justicia/hablaron-con-abogados-de-punta-peuco-querella-pide-investigar-celulares-de-rabat-y-silva-por-rebajas-de-penas/11/10/" target="_blank" rel="noopener">El Ciudadano (querella) ↗</a>
+          <a class="chip" href="https://reportea.cl/2026/11/05/rebajas-de-condenas-ministro-rabat-oculto-ante-el-congreso-las-sentencias-de-la-suprema-que-rechazaron-el-beneficio-para-pederastas/" target="_blank" rel="noopener">Reportea (fallos Suprema) ↗</a>
+        </div>
+      </article>
+
+      <article class="story">
+        <div class="kicker">Economía — Presupuesto 2027</div>
+        <h3>La Cámara rechaza las partidas de Interior y Educación del Presupuesto 2027, y Hacienda promete revisar «Yo elijo mi PC» en el Senado</h3>
+        <ol>
+          <li><strong>El hecho compartido.</strong> CNN Chile, DF, Emol y El Mostrador informan el rechazo de partidas: Interior (por recortes a Senapred y la Ley Cholito, según El Mostrador) y Educación (según Emol); 24 Horas mantiene en portada la aprobación en general con cerca de 6.000 indicaciones.</li>
+          <li><strong>Enfoques.</strong> El Mostrador lo presenta como una advertencia cumplida del PDG; Emol destaca que Quiroz promete revisar «Yo elijo mi PC» en el Senado; DF habla de una «segunda jornada de tensión».</li>
+          <li><strong>Movilización paralela.</strong> El Desconcierto informa que la Confech y la CUT activan una ofensiva contra el Presupuesto 2027, con marchas al Mineduc, el Congreso y el Minvu.</li>
+        </ol>
+        <div class="chips">
+          <a class="chip" href="https://www.cnnchile.com/pais/primera-jornada-de-la-ley-de-presupuestos-2027-en-la-camara-se-rechazo-partida-del-ministerio-del-interior/" target="_blank" rel="noopener">CNN Chile (primera jornada) ↗</a>
+          <a class="chip" href="https://www.df.cl/economia-y-politica/macro/segunda-jornada-de-tension-camara-rechaza-el-presupuesto-2027-del" target="_blank" rel="noopener">DF (Interior) ↗</a>
+          <a class="chip" href="https://www.emol.com/noticias/Nacional/2026/11/11/1216775/camara-rechaza-presupuesto-educacion.html" target="_blank" rel="noopener">Emol (Educación) ↗</a>
+          <a class="chip" href="https://www.elmostrador.cl/noticias/pais/2026/11/10/pdg-cumple-advertencia-y-camara-rechaza-presupuesto-de-interior-por-recorte-a-senapred-y-ley-cholito/" target="_blank" rel="noopener">El Mostrador (PDG) ↗</a>
+          <a class="chip" href="https://www.24horas.cl/actualidad/politica/camara-aprueba-en-general-el-presupuesto-2027-se-presentaron-6-mil-indicaciones" target="_blank" rel="noopener">24 Horas (6 mil indicaciones) ↗</a>
+          <a class="chip" href="https://eldesconcierto.cl/actualidad/confech-y-cut-activan-ofensiva-contra-presupuesto-2027-marchas-al-mineduc-congreso-y-minvu-n5463930" target="_blank" rel="noopener">El Desconcierto (Confech y CUT) ↗</a>
+        </div>
+      </article>
+
+      <article class="story">
+        <div class="kicker">Gobierno — nombramientos</div>
+        <h3>Cancillería defiende a Steinert como «la persona adecuada» para Paraguay; en el oficialismo hablan de «premio de consuelo»</h3>
+        <ol>
+          <li><strong>El hecho compartido.</strong> Radio U. de Chile y Publimetro informan que la exministra será agregada de seguridad en Paraguay para coordinar el combate al narcotráfico y al crimen organizado, casi seis meses después de dejar el Gobierno.</li>
+          <li><strong>Defensa y crítica.</strong> Emol recoge la defensa de Cancillería («la persona adecuada»), mientras BioBioChile cita en el oficialismo la expresión «premio de consuelo» y El Ciudadano la titula «no cabía más gente en el segundo piso».</li>
+          <li><strong>Otras lecturas.</strong> El Desconcierto informa que Steinert «vuelve a trabajar en el gobierno» de Kast y publica columnas sobre Paraguay; Reportea había contado cómo el colapso del banco Ueno derivó en la crisis del gobierno paraguayo.</li>
+        </ol>
+        <div class="chips">
+          <a class="chip" href="https://radio.uchile.cl/2026/11/10/trinidad-steinert-asumira-como-agregada-de-seguridad-en-paraguay-a-meses-de-su-salida-del-gabinete/" target="_blank" rel="noopener">Radio U. de Chile ↗</a>
+          <a class="chip" href="https://www.publimetro.cl/noticias/2026/11/10/trinidad-steinert-es-nombrada-agregada-en-paraguay-para-articular-combate-al-crimen-organizado/" target="_blank" rel="noopener">Publimetro ↗</a>
+          <a class="chip" href="https://www.emol.com/noticias/Nacional/2026/11/11/1216765/canciller-por-steinert-y-malvinas.html" target="_blank" rel="noopener">Emol (Cancillería) ↗</a>
+          <a class="chip" href="https://www.biobiochile.cl/noticias/nacional/chile/2026/11/10/el-arte-de-caer-parado-steinert-vuelve-al-gobierno-y-en-el-oficialismo-se-habla-de-premio-de-consuelo.shtml" target="_blank" rel="noopener">BioBioChile (premio de consuelo) ↗</a>
+          <a class="chip" href="https://www.elciudadano.com/chile/no-cabia-mas-gente-en-el-segundo-piso-trinidad-steinert-vuelve-al-gobierno-como-agregada-de-seguridad-en-paraguay/11/10/" target="_blank" rel="noopener">El Ciudadano ↗</a>
+          <a class="chip" href="https://eldesconcierto.cl/actualidad/trinidad-steinert-vuelve-trabajar-el-gobierno-kast-la-designa-agregada-seguridad-paraguay-n5463906" target="_blank" rel="noopener">El Desconcierto ↗</a>
+          <a class="chip" href="https://reportea.cl/2026/11/06/como-la-caida-del-banco-ueno-en-paraguay-acabo-con-el-gobierno-del-presidente-santiago-pena/" target="_blank" rel="noopener">Reportea (Ueno) ↗</a>
+        </div>
+      </article>
+
+    </section>
+
+    <aside class="sidebar">
+      <section class="briefs">
+        <h2 class="section-label">Innovación &amp; Startups</h2>
+        <ul>
+          <li class="brief">
+            <span class="outlet">Diario Financiero (DF Lab)</span>
+            <a class="headline" href="https://www.df.cl/df-lab/innovacion-y-startups/g-strata-la-startup-chilena-que-busca-agua-subterranea-con-ia-alista-su" target="_blank" rel="noopener">G-Strata, la startup chilena que busca agua subterránea con IA, alista su expansión a Perú y Uruguay</a>
+            <p>Startup chilena que usa inteligencia artificial para ubicar agua subterránea y apunta a nuevos mercados.</p>
+          </li>
+          <li class="brief">
+            <span class="outlet">Diario Financiero</span>
+            <a class="headline" href="https://www.df.cl/aniversario/df-lab/talento-tecnico-la-pieza-que-falta-para-aprovechar-el-auge-de-los-data" target="_blank" rel="noopener">Talento técnico, la pieza que falta para aprovechar el auge de los data centers</a>
+            <p>Pieza de DF sobre la brecha de talento técnico frente al crecimiento de los centros de datos.</p>
+          </li>
+          <li class="brief">
+            <span class="outlet">BioBioChile</span>
+            <a class="headline" href="https://www.biobiochile.cl/noticias/ciencia-y-tecnologia/ciencia/2026/11/04/elvir-la-plataforma-chilena-con-ia-que-prepara-a-personas-con-discapacidad-para-entrevistas-laborales.shtml" target="_blank" rel="noopener">ELVIR, la plataforma chilena con IA que prepara a personas con discapacidad para entrevistas laborales</a>
+            <p>Plataforma con IA para practicar entrevistas de trabajo.</p>
+          </li>
+          <li class="brief">
+            <span class="outlet">24 Horas</span>
+            <a class="headline" href="https://www.24horas.cl/tendencias/tecnologia-y-ciencias/astronoma-chilena-descubrio-galaxias-ocultas" target="_blank" rel="noopener">Astrónoma chilena descubrió 52 galaxias ocultas</a>
+            <p>Hallazgo que ayuda a explicar por qué algunos sistemas dejan de formar estrellas.</p>
+          </li>
+          <li class="brief">
+            <span class="outlet">Interferencia</span>
+            <a class="headline" href="https://interferencia.cl/articulos/identifican-en-la-patagonia-un-fiordo-sin-oxigeno-y-rico-en-sulfuro-con-condiciones" target="_blank" rel="noopener">Identifican en la Patagonia un fiordo sin oxígeno y rico en sulfuro con condiciones similares al océano antiguo</a>
+            <p>Un estero patagónico permite estudiar cómo pudo ser el océano en etapas tempranas de la Tierra.</p>
+          </li>
+          <li class="brief">
+            <span class="outlet">El Mostrador (Agenda Innovación)</span>
+            <a class="headline" href="https://www.elmostrador.cl/agenda-pais/agenda-innovacion/2026/11/11/investigaciones-exploran-el-potencial-de-algas-hongos-y-legumbres-para-la-alimentacion-del-futuro/" target="_blank" rel="noopener">Investigaciones exploran el potencial de algas, hongos y legumbres para la alimentación del futuro</a>
+            <p>Cinco investigaciones con Nestlé R&amp;D Latam sobre ingredientes alternativos y nutrición materna.</p>
+          </li>
+        </ul>
+      </section>
+
+      <section class="briefs">
+        <h2 class="section-label">Investigación &amp; Transparencia</h2>
+        <ul>
+          <li class="brief">
+            <span class="outlet">Reportea (8 nov)</span>
+            <a class="headline" href="https://reportea.cl/2026/11/08/presidenta-de-la-corte-de-valparaiso-decide-no-inhabilitarse-en-eleccion-de-fiscal-regional-que-investigara-a-su-hermano/" target="_blank" rel="noopener">Presidenta de la Corte de Valparaíso decide no inhabilitarse en elección de fiscal regional que investigará a su hermano</a>
+            <p>La ministra Silvana Donoso participa en la elección del fiscal que deberá resolver parte del caso Hermosilla, que involucra a su hermano. Reportea no tenía piezas de hoy.</p>
+          </li>
+          <li class="brief">
+            <span class="outlet">Reportea (5 nov)</span>
+            <a class="headline" href="https://reportea.cl/2026/11/05/rebajas-de-condenas-ministro-rabat-oculto-ante-el-congreso-las-sentencias-de-la-suprema-que-rechazaron-el-beneficio-para-pederastas/" target="_blank" rel="noopener">Rebajas de condenas: ministro Rabat ocultó ante el Congreso las sentencias de la Suprema que rechazaron el beneficio para pederastas</a>
+            <p>La Suprema rechazó seis solicitudes de condenados por delitos sexuales contra menores, según la investigación.</p>
+          </li>
+          <li class="brief">
+            <span class="outlet">CIPER (Radar 9 nov)</span>
+            <a class="headline" href="https://www.ciperchile.cl/2026/11/09/radar-09-11-26/" target="_blank" rel="noopener">Alza de combustibles y freno propuesto: el Gobierno presenta un proyecto para limitar futuras alzas</a>
+            <p>El Radar reúne también la ampliación de la suspensión de rebajas de condena.</p>
+          </li>
+          <li class="brief">
+            <span class="outlet">Interferencia</span>
+            <a class="headline" href="https://interferencia.cl/articulos/rabat-aprobo-rebajas-de-condena-que-sus-oficinas-regionales-habian-objetado-dos-de-ellas" target="_blank" rel="noopener">Rabat aprobó rebajas de condena que sus oficinas regionales habían objetado</a>
+            <p>Documentos muestran objeciones internas, dos de ellas bajo alerta de la ley contra agresores sexuales.</p>
+          </li>
+          <li class="brief">
+            <span class="outlet">El Ciudadano</span>
+            <a class="headline" href="https://www.elciudadano.com/justicia/hablaron-con-abogados-de-punta-peuco-querella-pide-investigar-celulares-de-rabat-y-silva-por-rebajas-de-penas/11/10/" target="_blank" rel="noopener">¿Hablaron con abogados de Punta Peuco?: querella pide investigar celulares de Rabat y Silva</a>
+            <p>La querella apunta a rebajas de penas a condenados por crímenes de la dictadura.</p>
+          </li>
+        </ul>
+      </section>
+
+      <section class="briefs">
+        <h2 class="section-label">Pensamiento &amp; Opinión</h2>
+        <ul>
+          <li class="brief">
+            <span class="outlet">Radio U. de Chile (Opinión)</span>
+            <a class="headline" href="https://radio.uchile.cl/2026/11/08/del-genoma-a-la-ia-un-cambio-de-era-que-vuelve-a-anunciarse/" target="_blank" rel="noopener">Del genoma a la IA: un cambio de era que vuelve a anunciarse</a>
+            <p>Marcelo Arnold-Cathalifaud sobre los cambios de época asociados a la genómica y la inteligencia artificial.</p>
+          </li>
+          <li class="brief">
+            <span class="outlet">Emol / El Mercurio (Blogs)</span>
+            <a class="headline" href="https://www.elmercurio.com/blogs/2026/11/11/136493/gobernantes-no-dioses.aspx" target="_blank" rel="noopener">Gobernantes, no dioses</a>
+            <p>Gonzalo Rojas escribe sobre el Estado y el progreso personal.</p>
+          </li>
+          <li class="brief">
+            <span class="outlet">BioBioChile (Opinión)</span>
+            <a class="headline" href="https://www.biobiochile.cl/noticias/opinion/columnas-bbcl/2026/11/10/pepe-los-camioneros-te-estan-picoteando-los-ojos.shtml" target="_blank" rel="noopener">Pepe, los camioneros te están picoteando los ojos</a>
+            <p>Gastón Saavedra sobre el paro de camioneros y la discusión política.</p>
+          </li>
+          <li class="brief">
+            <span class="outlet">El Mostrador (Opinión)</span>
+            <a class="headline" href="https://www.elmostrador.cl/noticias/opinion/columnas/2026/11/11/un-modelo-que-nadie-se-atreve-a-tocar/" target="_blank" rel="noopener">Un modelo que nadie se atreve a tocar</a>
+            <p>Guido Romo Costamaillère sostiene que el orden actual se sostiene por temor a las alternativas y no se estabilizará sin instituciones que produzcan justicia.</p>
+          </li>
+          <li class="brief">
+            <span class="outlet">El Mostrador (Opinión)</span>
+            <a class="headline" href="https://www.elmostrador.cl/noticias/opinion/columnas/2026/11/11/francia-chile-a-cada-pais-su-octubrismo/" target="_blank" rel="noopener">Francia, Chile: a cada país su octubrismo</a>
+            <p>Columna de François Meunier que compara fenómenos políticos de Francia y Chile (descripción según el titular).</p>
+          </li>
+          <li class="brief">
+            <span class="outlet">El Desconcierto (Opinión)</span>
+            <a class="headline" href="https://eldesconcierto.cl/opinion/kast-y-la-estafa-piramidal-sus-promesas-electorales-n5463921" target="_blank" rel="noopener">Kast y la estafa piramidal de sus promesas electorales</a>
+            <p>Jorge Olguín Olate critica el cumplimiento de las promesas de campaña.</p>
+          </li>
+          <li class="brief">
+            <span class="outlet">CNN Chile (Lo dijeron en CNN)</span>
+            <a class="headline" href="https://www.cnnchile.com/lodijeronencnn/rocio-montes-y-la-gira-de-kast-por-asia-el-desafio-de-equilibrar-las-relaciones-con-china-y-estados-unidos/" target="_blank" rel="noopener">Rocío Montes y la gira de Kast por Asia</a>
+            <p>El desafío de equilibrar las relaciones con China y Estados Unidos.</p>
+          </li>
+        </ul>
+      </section>
+
+    </aside>
+  </div>
+
+  <section class="pulse-section">
+    <h2 class="section-label">Pulso social — cómo reacciona la conversación pública</h2>
+    <p class="pulse-intro">Con el paro camionero en curso y el caso Rabat sin cerrarse, la última medición Criteria (terreno 5 y 6 de noviembre, difundida el 8) ubica la aprobación de Kast en 24% y la desaprobación en 67%, el peor registro de su serie 2026.</p>
+
+    <div class="sentiment-strip">
+      <div class="sentiment-bar" role="img" aria-label="Aprobación presidencial Criteria (8 nov): 24% aprueba, 9% sin posición, 67% desaprueba">
+        <span class="seg-fav" style="width:24%"></span>
+        <span class="seg-neu" style="width:9%"></span>
+        <span class="seg-neg" style="width:67%"></span>
+      </div>
+      <div class="sentiment-legend">
+        <span><span class="dot fav"></span>Aprueba (Criteria, 8 nov) — 24%</span>
+        <span><span class="dot neu"></span>Sin posición definida — 9%</span>
+        <span><span class="dot neg"></span>Desaprueba — 67%</span>
+      </div>
+    </div>
+
+    <div class="pulse-grid">
+      <div class="pulse-card">
+        <span class="outlet">T13 · Criteria</span>
+        <h4><a href="https://www.t13.cl/noticia/politica/criteria-aprobacion-al-presidente-kast-cae-al-24-desaprobacion-sube-al-67-8-11-2026" target="_blank" rel="noopener">Criteria: aprobación a Kast cae al 24% y la desaprobación sube al 67%</a></h4>
+        <p>Solo 26% cree que «enfrenta adecuadamente las dificultades» y es «el líder que Chile necesita»; 36% lo ve honesto. Panel online, 802 casos mayores de 18 años.</p>
+      </div>
+      <div class="pulse-card">
+        <span class="outlet">El Ciudadano · Termómetro SWAY</span>
+        <h4><a href="https://www.elciudadano.com/politica/bencinas-al-alza-y-kast-a-la-baja-pierde-31-puntos-de-aprobacion-mientras-75-acusa-el-golpe-de-los-combustibles/11/10/" target="_blank" rel="noopener">Bencinas al alza y Kast a la baja: pierde 31 puntos de aprobación mientras 75% acusa el golpe de los combustibles</a></h4>
+        <p>Estudio de SWAY LATAM sobre seis encuestas: Cadem pasa de 57% a 26% entre marzo y octubre; 75% dice haber sido impactado por el alza y 58% gastó menos en otras cosas.</p>
+      </div>
+      <div class="pulse-card">
+        <span class="outlet">El Dínamo · Reportaje</span>
+        <h4><a href="https://www.eldinamo.cl/reportajes/2026/11/06/el-pendulo-del-animo-en-chile-radiografia-a-la-desesperanza/" target="_blank" rel="noopener">El péndulo del ánimo en Chile: de la esperanza electoral a un pesimismo que no se veía desde 2015</a></h4>
+        <p>Según el reportaje, el Cadem del 1 de noviembre registra 71% que cree que el país va por mal camino y 92% que evalúa mal el empleo; Criteria muestra que la esperanza como emoción bajó a 29%.</p>
+      </div>
+      <div class="pulse-card">
+        <span class="outlet">El Desconcierto · Movilización</span>
+        <h4><a href="https://eldesconcierto.cl/actualidad/confech-y-cut-activan-ofensiva-contra-presupuesto-2027-marchas-al-mineduc-congreso-y-minvu-n5463930" target="_blank" rel="noopener">Confech y CUT activan ofensiva contra Presupuesto 2027: marchas al Mineduc, Congreso y Minvu</a></h4>
+        <p>Organizaciones sociales planifican movilizaciones contra el proyecto de presupuesto, en paralelo al paro de transporte.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="thought-section" id="pensamiento">
+    <h2 class="section-label">Pensamiento y humanidades — ideas de Ethic</h2>
+    <p class="thought-intro">Una pausa del ruido de la coyuntura: cuatro lecturas de Ethic, la revista española de pensamiento, sobre cómo se lee el pasado, la democracia estadounidense, el deterioro de las plataformas digitales y el diálogo interior. No son prensa chilena; son ideas para leer con calma. Las fechas indican que son piezas de meses atrás.</p>
+
+    <div class="thought-grid">
+      <div class="thought-card">
+        <span class="kicker">Entrevista · Diego Felipe González Gómez con Lea Ypi · 24 ago 2026</span>
+        <h4><a href="https://ethic.es/entrevistas/entrevista-lea-ypi" target="_blank" rel="noopener">«La historia no se compone de borrados, sino de capas»</a></h4>
+        <p>Para la filósofa Lea Ypi, el pasado no debe borrarse sino reinterpretarse en capas, y quien pretende ocultarlo muestra miedo; lo responsable es estudiarlo y edificar sobre lo ocurrido.</p>
+        <blockquote>«La historia no se compone de borrados, sino de capas»</blockquote>
+      </div>
+      <div class="thought-card">
+        <span class="kicker">Entrevista · Ricardo Dudda con Susan Neiman · 25 may 2026</span>
+        <h4><a href="https://ethic.es/entrevista-susan-neiman-estados-unidos" target="_blank" rel="noopener">«Estados Unidos ya no es una democracia»</a></h4>
+        <p>Neiman considera que el trumpismo es un nuevo fascismo y que Estados Unidos ya no puede llamarse democracia, aunque observa que los estadounidenses empiezan a despertar y ve signos de esperanza en la oposición.</p>
+        <blockquote>«Estados Unidos ya no es una democracia»</blockquote>
+      </div>
+      <div class="thought-card">
+        <span class="kicker">Entrevista · Esther Paniagua con Cory Doctorow · 24 mar 2026</span>
+        <h4><a href="https://ethic.es/entrevista-cory-doctorow" target="_blank" rel="noopener">«Las plataformas primero te seducen, luego te atrapan y al final te exprimen»</a></h4>
+        <p>Doctorow sostiene que las plataformas degradan sus servicios por fases para extraer valor de usuarios, empresas y proveedores, algo que se agrava sin regulación, competencia o interoperabilidad; la IA acelera el proceso, pero las crisis abren la opción de una infraestructura más abierta.</p>
+        <blockquote>«Las plataformas primero te seducen, luego te atrapan y al final te exprimen»</blockquote>
+      </div>
+      <div class="thought-card">
+        <span class="kicker">Pensamiento · Pablo Cerezal · 3 jul 2026</span>
+        <h4><a href="https://ethic.es/unamuno-conversacion-interior" target="_blank" rel="noopener">Unamuno y la conversación interior</a></h4>
+        <p>Con <em>Niebla</em>, Unamuno introdujo en la literatura española el flujo de conciencia y el monólogo interior, y con ellos su idea de que el yo se descubre mediante el diálogo interior y de que el pensamiento se da en el lenguaje.</p>
+        <blockquote>«no hay más diálogo verdadero que el que entables contigo mismo»</blockquote>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="next-edition">Próxima edición: jueves 12 de noviembre de 2026</div>
+    <div class="colophon">
+      Fuentes monitoreadas: <span class="sources-list">Radio U. de Chile · Diario Financiero · CIPER Chile · Interferencia · Ethic · El Mostrador · BioBioChile · El Ciudadano · CEP Chile · El Desconcierto · Emol · El Dínamo · Reportea · CNN Chile · 24 Horas · El País · Publimetro</span>. Curaduría y síntesis comparativa generadas automáticamente a partir de portadas públicas del día (El País no pudo consultarse: acceso bloqueado en el entorno; CEP Chile solo mostraba una pieza, sobre su reconocimiento en OTT Think Tanks to Watch; Publimetro no tenía secciones de política, innovación ni opinión y sus notas son del 10 y 11 de noviembre; 24 Horas no mostraba sociedad ni opinión; Reportea no tenía piezas de hoy y se usaron las más recientes, del 5 y 8 de noviembre; las portadas de DF y BioBioChile se leyeron solo en sus primeros 100.000 caracteres; varias descripciones de columnas se basan en el titular visible en portada; en Pulso social, la barra corresponde al Criteria difundido el 8 de noviembre; en la sección de Ethic, las diez piezas de su portada ya se habían usado en las jornadas previas, por lo que se tomaron cuatro piezas no repetidas de sus archivos de entrevistas y pensamiento, todas con más de un mes de antigüedad y con la fecha en la etiqueta; la ejecución programada de la mañana falló por permisos de lectura y se repitió).
+    </div>
+  </footer>
+
+</div>
+
+
+</body>
+</html>
